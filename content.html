@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusLearn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#4ade80;
+      --secondary:#22c55e;
+      --bg:#f0fdf4;
+      --card:#ffffff;
+      --text:#1f2937;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+
+    body{
+      background:linear-gradient(to bottom,#ecfdf5,#d1fae5);
+      color:var(--text);
+      min-height:100vh;
+      padding:20px;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:auto;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-weight:700;
+      font-size:28px;
+    }
+
+    .subtitle{
+      font-size:13px;
+      opacity:.7;
+    }
+
+    .search-box{
+      background:rgba(255,255,255,.7);
+      backdrop-filter:blur(8px);
+      padding:12px;
+      border-radius:14px;
+      margin-bottom:20px;
+      display:flex;
+      gap:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+
+    .search-box input{
+      flex:1;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      outline:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+
+    .card{
+      background:var(--card);
+      padding:16px;
+      border-radius:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      transition:.25s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card:hover{
+      transform:translateY(-4px) scale(1.01);
+      box-shadow:0 14px 28px rgba(0,0,0,.12);
+    }
+
+    .icon{
+      width:52px;
+      height:52px;
+      border-radius:14px;
+      background:var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .card h3{
+      font-size:18px;
+      margin-bottom:4px;
+    }
+
+    .card p{
+      font-size:13px;
+      opacity:.7;
+      margin-bottom:12px;
+      min-height:36px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:13px;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:white;
+    }
+
+    .btn-primary:hover{
+      background:var(--secondary);
+    }
+
+    .badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      font-size:11px;
+      background:#ecfeff;
+      padding:4px 8px;
+      border-radius:999px;
+    }
+
+    footer{
+      text-align:center;
+      margin-top:24px;
+      font-size:13px;
+      opacity:.6;
+    }
+
+    .fade-in{
+      animation:fade .6s ease forwards;
+      opacity:0;
+    }
+
+    @keyframes fade{
+      to{opacity:1;transform:translateY(0)}
+      from{opacity:0;transform:translateY(8px)}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div>
+        <h1>FocusLearn</h1>
+        <div class="subtitle">Media belajar sejuk & modern</div>
+      </div>
+      <div>🎯</div>
+    </header>
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Cari: matematika, coding, video..." />
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      Fokus lebih lama, belajar lebih banyak ✨
+    </footer>
+
+  </div>
+
+  <script>
+    const sites = [
+      {name:"Khan Academy",icon:"📘",desc:"Materi matematika & sains gratis.",url:"https://www.khanacademy.org",tag:"Umum"},
+      {name:"Coursera",icon:"🎓",desc:"Kursus dari universitas dunia.",url:"https://www.coursera.org",tag:"Kursus"},
+      {name:"Ruangguru",icon:"📚",desc:"Belajar sekolah lengkap.",url:"https://www.ruangguru.com",tag:"Umum"},
+      {name:"Zenius",icon:"🧠",desc:"Pendalaman konsep pelajaran.",url:"https://www.zenius.net",tag:"Umum"},
+      {name:"YouTube Edu",icon:"▶️",desc:"Video pelajaran gratis.",url:"https://www.youtube.com",tag:"Video"},
+      {name:"Codecademy",icon:"💻",desc:"Belajar coding interaktif.",url:"https://www.codecademy.com",tag:"Coding"}
+    ];
+
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
+
+    function render(data){
+      grid.innerHTML = '';
+      data.forEach((s,i)=>{
+        const card = document.createElement('div');
+        card.className = 'card fade-in';
+        card.style.animationDelay = `${i*0.08}s`;
+        card.innerHTML = `
+          <div class="badge">${s.tag}</div>
+          <div class="icon">${s.icon}</div>
+          <h3>${s.name}</h3>
+          <p>${s.desc}</p>
+          <a href="${s.url}" target="_blank" class="btn btn-primary">Buka</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    search.addEventListener('input',()=>{
+      const q = search.value.toLowerCase();
+      const filtered = sites.filter(s =>
+        s.name.toLowerCase().includes(q) ||
+        s.desc.toLowerCase().includes(q) ||
+        s.tag.toLowerCase().includes(q)
+      );
+      render(filtered);
+    });
+
+    render(sites);
+  </script>
+</body>
+</html>
