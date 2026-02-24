@@ -39,6 +39,230 @@
             overflow-x: hidden;
         }
 
+        /* ==================== LOGIN PAGE ==================== */
+        .login-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-page::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .login-logo h1 {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .login-logo p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 111, 165, 0.3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ==================== AVATAR SELECTION ==================== */
+        .avatar-selection {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .avatar-box {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.6s ease;
+        }
+
+        .avatar-box h2 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .avatar-box p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .avatar-option {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            border: 3px solid #e0e0e0;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 auto;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+
+        .avatar-option.selected {
+            border-color: var(--success);
+            background: #e8f5e9;
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 16px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-confirm:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-confirm:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(42, 157, 143, 0.3);
+        }
+
+        /* ==================== MAIN APP ==================== */
+        .main-app {
+            display: none;
+        }
+
         /* Header */
         .header {
             background: var(--primary);
@@ -96,12 +320,42 @@
             font-size: 3rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             border: 4px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .avatar-edit {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--accent);
+            color: var(--dark);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .avatar-edit:hover {
+            transform: scale(1.1);
+            background: var(--warning);
         }
 
         .level-badge {
             position: absolute;
             bottom: 0;
-            right: 0;
+            left: 0;
             background: var(--accent);
             color: var(--dark);
             padding: 5px 12px;
@@ -113,6 +367,12 @@
 
         .user-info h2 {
             font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            opacity: 0.9;
+            font-size: 0.85rem;
             margin-bottom: 5px;
         }
 
@@ -561,366 +821,736 @@
             margin-top: 10px;
             box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
+
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1><i class="fas fa-graduation-cap"></i> Be!ajar Quyy</h1>
-            <div class="header-icons">
-                <i class="fas fa-bell"></i>
-                <i class="fas fa-cog"></i>
-            </div>
-        </div>
-
-        <!-- Profile Section -->
-        <div class="profile-section">
-            <div class="avatar-container">
-                <div class="avatar">👨‍🎓</div>
-                <div class="level-badge">Lv. 3</div>
-            </div>
-            <div class="user-info">
-                <h2>Pembelajar Handal</h2>
-                <p>Tetap konsisten untuk naik level!</p>
-                <div class="badge">
-                    <i class="fas fa-fire"></i> Streak 5 Hari
+        
+        <!-- ==================== LOGIN PAGE ==================== -->
+        <div class="login-page" id="loginPage">
+            <div class="login-box">
+                <div class="login-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>BelajarLevel</h1>
+                    <p>Mulai perjalanan belajarmu!</p>
+                </div>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="userName"><i class="fas fa-user"></i> Nama Lengkap</label>
+                        <input type="text" id="userName" placeholder="Masukkan nama kamu" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="userEmail" placeholder="nama@email.com" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Mulai Belajar
+                    </button>
+                </form>
+                
+                <div class="login-footer">
+                    <p>Belum punya akun? <a href="#" onclick="showRegister()">Daftar gratis</a></p>
+                    <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.7;">
+                        Data tersimpan di perangkat ini (local)
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-value">1,250</span>
-                <div class="stat-label">Total XP</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-value">12</span>
-                <div class="stat-label">Jam Belajar</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-value">7</span>
-                <div class="stat-label">Web Dikunjungi</div>
-            </div>
-        </div>
-
-        <!-- XP Progress -->
-        <div class="xp-section">
-            <div class="xp-header">
-                <span>Progress Level 4</span>
-                <span>250 / 500 XP</span>
-            </div>
-            <div class="xp-bar">
-                <div class="xp-fill" style="width: 50%"></div>
-            </div>
-        </div>
-
-        <!-- Streak Alert -->
-        <div class="streak-alert">
-            <div class="streak-icon">🔥</div>
-            <div class="streak-text">
-                <h3>Streak 5 Hari Berturut-turut!</h3>
-                <p>Ayo pertahankan, 2 hari lagi dapat bonus XP!</p>
+        <!-- ==================== AVATAR SELECTION ==================== -->
+        <div class="avatar-selection" id="avatarPage">
+            <div class="avatar-box">
+                <h2><i class="fas fa-user-circle"></i> Pilih Karakter</h2>
+                <p>Pilih avatar yang mewakili kamu!</p>
+                
+                <div class="avatar-grid">
+                    <div class="avatar-option" onclick="selectAvatar('👨‍🎓', this)" title="Pelajar Pria">
+                        👨‍🎓
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('👩‍🎓', this)" title="Pelajar Wanita">
+                        👩‍🎓
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('🦸', this)" title="Superhero">
+                        🦸
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('🦄', this)" title="Unicorn">
+                        🦄
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('🤖', this)" title="Robot">
+                        🤖
+                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('👾', this)" title="Alien">
+                        👾
+                    </div>
+                </div>
+                
+                <button class="btn-confirm" id="confirmAvatarBtn" onclick="confirmAvatar()" disabled>
+                    <i class="fas fa-check"></i> Konfirmasi Pilihan
+                </button>
             </div>
         </div>
 
-        <!-- Section Title -->
-        <div class="section-title">
-            <i class="fas fa-star"></i>
-            <span>Platform Belajar Pilihan</span>
-        </div>
-
-        <!-- Learning Platforms -->
-        <div class="platforms-grid">
-            <!-- Ruangguru -->
-            <div class="platform-card" onclick="visitPlatform('Ruangguru', 50)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Ruangguru</h3>
-                        <span>SD - SMA</span>
-                    </div>
-                </div>
-                <p class="platform-desc">
-                    Platform belajar lengkap dengan video pembelajaran, latihan soal, dan tryout untuk semua jenjang.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+50 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+        <!-- ==================== MAIN APP ==================== -->
+        <div class="main-app" id="mainApp">
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="fas fa-graduation-cap"></i> BelajarLevel</h1>
+                <div class="header-icons">
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-cog" onclick="showSettings()"></i>
                 </div>
             </div>
 
-            <!-- Zenius -->
-            <div class="platform-card" onclick="visitPlatform('Zenius', 40)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-brain"></i>
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="avatar-container">
+                    <div class="avatar" id="userAvatar" onclick="changeAvatar()">👨‍🎓</div>
+                    <div class="avatar-edit" onclick="changeAvatar()" title="Ganti Avatar">
+                        <i class="fas fa-camera"></i>
                     </div>
-                    <div class="platform-info">
-                        <h3>Zenius</h3>
-                        <span>Konsep Dasar</span>
-                    </div>
+                    <div class="level-badge" id="userLevelBadge">Lv. 1</div>
                 </div>
-                <p class="platform-desc">
-                    Belajar dengan pemahaman konsep, bukan hafalan. Cocok untuk persiapan UTBK dan olimpiade.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+40 XP</span>
+                <div class="user-info">
+                    <h2 id="displayName">Pembelajar</h2>
+                    <p class="user-email" id="displayEmail">email@example.com</p>
+                    <p id="userMotivation">Tetap konsisten untuk naik level!</p>
+                    <div class="badge" id="streakBadge">
+                        <i class="fas fa-fire"></i> Streak 0 Hari
                     </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                 </div>
             </div>
 
-            <!-- Quipper -->
-            <div class="platform-card" onclick="visitPlatform('Quipper', 35)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Quipper</h3>
-                        <span>Online Learning</span>
-                    </div>
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalXP">0</span>
+                    <div class="stat-label">Total XP</div>
                 </div>
-                <p class="platform-desc">
-                    Platform belajar online dengan guru-guru berpengalaman dan materi yang selalu diperbarui.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+35 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value" id="studyHours">0</span>
+                    <div class="stat-label">Jam Belajar</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value" id="visitedCount">0</span>
+                    <div class="stat-label">Web Dikunjungi</div>
                 </div>
             </div>
 
-            <!-- Pahamify -->
-            <div class="platform-card" onclick="visitPlatform('Pahamify', 45)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Pahamify</h3>
-                        <span>Belajar Seru</span>
-                    </div>
+            <!-- XP Progress -->
+            <div class="xp-section">
+                <div class="xp-header">
+                    <span id="progressLabel">Progress Level 2</span>
+                    <span id="progressText">0 / 100 XP</span>
                 </div>
-                <p class="platform-desc">
-                    Belajar jadi seru dengan gamifikasi! Video animasi dan kuis menarik untuk semua mata pelajaran.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+45 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                <div class="xp-bar">
+                    <div class="xp-fill" id="xpProgressBar" style="width: 0%"></div>
                 </div>
             </div>
 
-            <!-- Kelas Pintar -->
-            <div class="platform-card" onclick="visitPlatform('Kelas Pintar', 30)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Kelas Pintar</h3>
-                        <span>AI Tutor</span>
-                    </div>
-                </div>
-                <p class="platform-desc">
-                    Dampingan belajar dengan AI tutor yang personalisasi sesuai kebutuhan dan gaya belajarmu.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+30 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+            <!-- Streak Alert -->
+            <div class="streak-alert" id="streakAlert">
+                <div class="streak-icon">🔥</div>
+                <div class="streak-text">
+                    <h3>Streak <span id="streakDays">0</span> Hari Berturut-turut!</h3>
+                    <p>Ayo pertahankan, besok dapat bonus XP!</p>
                 </div>
             </div>
 
-            <!-- Brainly -->
-            <div class="platform-card" onclick="visitPlatform('Brainly', 25)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Brainly</h3>
-                        <span>Tanya Jawab</span>
-                    </div>
-                </div>
-                <p class="platform-desc">
-                    Komunitas belajar terbesar di Indonesia. Tanya soal sulit dan dapatkan jawaban dari teman lain.
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+25 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
-                </div>
-            </div>
-
-            <!-- Coursera -->
-            <div class="platform-card" onclick="visitPlatform('Coursera', 60)">
-                <div class="platform-header">
-                    <div class="platform-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <div class="platform-info">
-                        <h3>Coursera</h3>
-                        <span>Internasional</span>
-                    </div>
-                </div>
-                <p class="platform-desc">
-                    Kursus online dari universitas top dunia seperti Stanford, Yale, dan Google. Sertifikat resmi!
-                </p>
-                <div class="platform-footer">
-                    <div class="xp-reward">
-                        <i class="fas fa-bolt"></i>
-                        <span>+60 XP</span>
-                    </div>
-                    <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="section-title">
-            <i class="fas fa-bolt"></i>
-            <span>Aksi Cepat</span>
-        </div>
-        <div class="quick-actions">
-            <a href="#" class="action-btn" onclick="showStats()">
-                <i class="fas fa-chart-line"></i>
-                <span>Statistik</span>
-            </a>
-            <a href="#" class="action-btn" onclick="showLeaderboard()">
-                <i class="fas fa-trophy"></i>
-                <span>Peringkat</span>
-            </a>
-            <a href="#" class="action-btn" onclick="showRewards()">
-                <i class="fas fa-gift"></i>
-                <span>Hadiah</span>
-            </a>
-            <a href="#" class="action-btn" onclick="showSettings()">
-                <i class="fas fa-user-cog"></i>
-                <span>Profil</span>
-            </a>
-        </div>
-
-        <!-- Spacer for bottom -->
-        <div style="height: 100px;"></div>
-    </div>
-
-    <!-- Floating Action Button -->
-    <button class="fab" onclick="startFocusMode()" title="Mode Fokus">
-        <i class="fas fa-play"></i>
-    </button>
-
-    <!-- Modal -->
-    <div class="modal" id="xpModal">
-        <div class="modal-content">
-            <div class="modal-icon">
+            <!-- Section Title -->
+            <div class="section-title">
                 <i class="fas fa-star"></i>
+                <span>Platform Belajar Pilihan</span>
             </div>
-            <h2>XP Didapat!</h2>
-            <p id="modalText">Kamu mendapatkan +50 XP dari mengunjungi Ruangguru!</p>
-            <button class="modal-btn" onclick="closeModal()">Lanjutkan <i class="fas fa-arrow-right"></i></button>
+
+            <!-- Learning Platforms -->
+            <div class="platforms-grid">
+                <!-- Ruangguru -->
+                <div class="platform-card" onclick="visitPlatform('Ruangguru', 50, 'https://www.ruangguru.com')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Ruangguru</h3>
+                            <span>SD - SMA</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Platform belajar lengkap dengan video pembelajaran, latihan soal, dan tryout untuk semua jenjang.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+50 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Zenius -->
+                <div class="platform-card" onclick="visitPlatform('Zenius', 40, 'https://www.zenius.net')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Zenius</h3>
+                            <span>Konsep Dasar</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Belajar dengan pemahaman konsep, bukan hafalan. Cocok untuk persiapan UTBK dan olimpiade.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+40 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Quipper -->
+                <div class="platform-card" onclick="visitPlatform('Quipper', 35, 'https://www.quipper.com')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Quipper</h3>
+                            <span>Online Learning</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Platform belajar online dengan guru-guru berpengalaman dan materi yang selalu diperbarui.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+35 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Pahamify -->
+                <div class="platform-card" onclick="visitPlatform('Pahamify', 45, 'https://pahamify.com')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Pahamify</h3>
+                            <span>Belajar Seru</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Belajar jadi seru dengan gamifikasi! Video animasi dan kuis menarik untuk semua mata pelajaran.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+45 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Kelas Pintar -->
+                <div class="platform-card" onclick="visitPlatform('Kelas Pintar', 30, 'https://www.kelaspintar.id')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Kelas Pintar</h3>
+                            <span>AI Tutor</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Dampingan belajar dengan AI tutor yang personalisasi sesuai kebutuhan dan gaya belajarmu.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+30 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Brainly -->
+                <div class="platform-card" onclick="visitPlatform('Brainly', 25, 'https://brainly.co.id')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Brainly</h3>
+                            <span>Tanya Jawab</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Komunitas belajar terbesar di Indonesia. Tanya soal sulit dan dapatkan jawaban dari teman lain.
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+25 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Coursera -->
+                <div class="platform-card" onclick="visitPlatform('Coursera', 60, 'https://www.coursera.org')">
+                    <div class="platform-header">
+                        <div class="platform-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Coursera</h3>
+                            <span>Internasional</span>
+                        </div>
+                    </div>
+                    <p class="platform-desc">
+                        Kursus online dari universitas top dunia seperti Stanford, Yale, dan Google. Sertifikat resmi!
+                    </p>
+                    <div class="platform-footer">
+                        <div class="xp-reward">
+                            <i class="fas fa-bolt"></i>
+                            <span>+60 XP</span>
+                        </div>
+                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                <span>Aksi Cepat</span>
+            </div>
+            <div class="quick-actions">
+                <a href="#" class="action-btn" onclick="showStats()">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Statistik</span>
+                </a>
+                <a href="#" class="action-btn" onclick="showLeaderboard()">
+                    <i class="fas fa-trophy"></i>
+                    <span>Peringkat</span>
+                </a>
+                <a href="#" class="action-btn" onclick="showRewards()">
+                    <i class="fas fa-gift"></i>
+                    <span>Hadiah</span>
+                </a>
+                <a href="#" class="action-btn" onclick="showProfile()">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profil</span>
+                </a>
+            </div>
+
+            <!-- Spacer for bottom -->
+            <div style="height: 100px;"></div>
         </div>
+
+        <!-- Floating Action Button -->
+        <button class="fab" onclick="startFocusMode()" title="Mode Fokus">
+            <i class="fas fa-play"></i>
+        </button>
+
+        <!-- XP Modal -->
+        <div class="modal" id="xpModal">
+            <div class="modal-content">
+                <div class="modal-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h2>XP Didapat!</h2>
+                <p id="modalText">Kamu mendapatkan +50 XP!</p>
+                <button class="modal-btn" onclick="closeModal()">Lanjutkan <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Data pengguna (simulasi)
+        // ==================== DATA & STATE ====================
         let userData = {
-            xp: 1250,
-            level: 3,
-            streak: 5,
+            name: '',
+            email: '',
+            avatar: '👨‍🎓',
+            level: 1,
+            xp: 0,
+            totalXP: 0,
+            streak: 0,
             todayXP: 0,
-            visitedToday: []
+            studyHours: 0,
+            visitedPlatforms: [],
+            visitedToday: [],
+            lastVisit: null
         };
 
-        // Fungsi kunjungi platform
-        function visitPlatform(platformName, xpReward) {
+        let tempAvatar = null;
+
+        const levelThresholds = [0, 100, 250, 500, 1000, 2000];
+        const levelTitles = ['Pemula', 'Petualang', 'Pejuang', 'Jawara', 'Legenda', 'Master'];
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            checkExistingLogin();
+        });
+
+        function checkExistingLogin() {
+            const saved = localStorage.getItem('belajarLevelUser');
+            if (saved) {
+                userData = JSON.parse(saved);
+                updateUIFromData();
+                showMainApp();
+            } else {
+                showLoginPage();
+            }
+        }
+
+        // ==================== NAVIGATION ====================
+        function showLoginPage() {
+            hideAllPages();
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function showAvatarPage() {
+            hideAllPages();
+            document.getElementById('avatarPage').style.display = 'flex';
+        }
+
+        function showMainApp() {
+            hideAllPages();
+            document.getElementById('mainApp').style.display = 'block';
+            document.querySelector('.fab').style.display = 'flex';
+        }
+
+        function hideAllPages() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('avatarPage').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'none';
+            document.querySelector('.fab').style.display = 'none';
+        }
+
+        // ==================== LOGIN ====================
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            
+            if (name && email) {
+                userData.name = name;
+                userData.email = email;
+                
+                // Simpan sementara, tunggu pilih avatar
+                showAvatarPage();
+            }
+        }
+
+        function showRegister() {
+            alert('Fitur daftar: Masukkan nama dan email, lalu pilih avatar untuk memulai!');
+        }
+
+        // ==================== AVATAR SELECTION ====================
+        function selectAvatar(emoji, element) {
+            // Remove selected class from all
+            document.querySelectorAll('.avatar-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add to clicked
+            element.classList.add('selected');
+            tempAvatar = emoji;
+            
+            // Enable confirm button
+            document.getElementById('confirmAvatarBtn').disabled = false;
+        }
+
+        function confirmAvatar() {
+            if (tempAvatar) {
+                userData.avatar = tempAvatar;
+                saveData();
+                updateUIFromData();
+                showMainApp();
+                showWelcomeToast();
+            }
+        }
+
+        function changeAvatar() {
+            // Reset selection
+            tempAvatar = userData.avatar;
+            document.querySelectorAll('.avatar-option').forEach(el => {
+                el.classList.remove('selected');
+                if (el.textContent.trim() === userData.avatar) {
+                    el.classList.add('selected');
+                }
+            });
+            document.getElementById('confirmAvatarBtn').disabled = false;
+            
+            showAvatarPage();
+        }
+
+        // ==================== UI UPDATES ====================
+        function updateUIFromData() {
+            // Profile
+            document.getElementById('userAvatar').textContent = userData.avatar;
+            document.getElementById('displayName').textContent = userData.name;
+            document.getElementById('displayEmail').textContent = userData.email;
+            document.getElementById('userLevelBadge').textContent = `Lv. ${userData.level}`;
+            
+            // Stats
+            document.getElementById('totalXP').textContent = userData.totalXP;
+            document.getElementById('studyHours').textContent = userData.studyHours;
+            document.getElementById('visitedCount').textContent = userData.visitedPlatforms.length;
+            
+            // XP Bar
+            updateXPBar();
+            
+            // Streak
+            updateStreak();
+        }
+
+        function updateXPBar() {
+            const currentLevelBase = levelThresholds[userData.level - 1] || 0;
+            const nextLevelXP = levelThresholds[userData.level] || 2000;
+            const xpInLevel = userData.totalXP - currentLevelBase;
+            const xpNeeded = nextLevelXP - currentLevelBase;
+            const progress = Math.min((xpInLevel / xpNeeded) * 100, 100);
+            
+            document.getElementById('progressLabel').textContent = `Progress Level ${userData.level + 1} (${levelTitles[userData.level]})`;
+            document.getElementById('progressText').textContent = `${xpInLevel} / ${xpNeeded} XP`;
+            document.getElementById('xpProgressBar').style.width = `${progress}%`;
+        }
+
+        function updateStreak() {
+            document.getElementById('streakDays').textContent = userData.streak;
+            document.getElementById('streakBadge').innerHTML = `<i class="fas fa-fire"></i> Streak ${userData.streak} Hari`;
+            
+            if (userData.streak > 0) {
+                document.getElementById('streakAlert').style.display = 'flex';
+            } else {
+                document.getElementById('streakAlert').style.display = 'none';
+            }
+        }
+
+        // ==================== PLATFORM VISIT ====================
+        function visitPlatform(name, xp, url) {
             // Cek apakah sudah dikunjungi hari ini
-            if (userData.visitedToday.includes(platformName)) {
-                alert(`Kamu sudah mengunjungi ${platformName} hari ini! Coba platform lain ya.`);
+            const today = new Date().toDateString();
+            const lastVisit = userData.lastVisit;
+            
+            // Reset visitedToday jika hari baru
+            if (lastVisit !== today) {
+                userData.visitedToday = [];
+                userData.todayXP = 0;
+                
+                // Update streak
+                if (lastVisit) {
+                    const lastDate = new Date(lastVisit);
+                    const todayDate = new Date();
+                    const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
+                    
+                    if (diffDays === 1) {
+                        userData.streak++;
+                        showStreakToast();
+                    } else if (diffDays > 1) {
+                        userData.streak = 1;
+                    }
+                } else {
+                    userData.streak = 1;
+                }
+                
+                userData.lastVisit = today;
+            }
+            
+            // Cek double visit
+            if (userData.visitedToday.includes(name)) {
+                alert(`Kamu sudah mengunjungi ${name} hari ini! Coba platform lain ya.`);
                 return;
             }
-
+            
             // Tambah XP
-            userData.xp += xpReward;
-            userData.todayXP += xpReward;
-            userData.visitedToday.push(platformName);
-
-            // Update tampilan XP
-            updateXP();
-
+            userData.totalXP += xp;
+            userData.todayXP += xp;
+            userData.xp += xp;
+            userData.visitedToday.push(name);
+            
+            if (!userData.visitedPlatforms.includes(name)) {
+                userData.visitedPlatforms.push(name);
+            }
+            
+            // Cek level up
+            checkLevelUp();
+            
+            // Simpan dan update UI
+            saveData();
+            updateUIFromData();
+            
             // Tampilkan modal
-            showModal(platformName, xpReward);
-
-            // Buka platform di tab baru (simulasi)
+            showModal(name, xp);
+            
+            // Buka platform
             setTimeout(() => {
-                const urls = {
-                    'Ruangguru': 'https://www.ruangguru.com',
-                    'Zenius': 'https://www.zenius.net',
-                    'Quipper': 'https://www.quipper.com',
-                    'Pahamify': 'https://pahamify.com',
-                    'Kelas Pintar': 'https://www.kelaspintar.id',
-                    'Brainly': 'https://brainly.co.id',
-                    'Coursera': 'https://www.coursera.org'
-                };
-                
-                if (urls[platformName]) {
-                    window.open(urls[platformName], '_blank');
-                }
-            }, 1000);
+                window.open(url, '_blank');
+            }, 800);
         }
 
-        // Update tampilan XP
-        function updateXP() {
-            // Update stat value
-            document.querySelector('.stat-value').textContent = userData.xp;
-            
-            // Update progress bar (asumsi level up setiap 500 XP)
-            const xpForNextLevel = 500;
-            const currentLevelXP = userData.xp % xpForNextLevel;
-            const progress = (currentLevelXP / xpForNextLevel) * 100;
-            
-            document.querySelector('.xp-fill').style.width = progress + '%';
-            document.querySelector('.xp-header span:first-child').textContent = `Progress Level ${userData.level + 1}`;
-            document.querySelector('.xp-header span:last-child').textContent = `${currentLevelXP} / ${xpForNextLevel} XP`;
+        function checkLevelUp() {
+            const nextLevelXP = levelThresholds[userData.level];
+            if (nextLevelXP && userData.totalXP >= nextLevelXP) {
+                userData.level++;
+                setTimeout(() => {
+                    alert(`🎉 Selamat! Kamu naik ke Level ${userData.level} - ${levelTitles[userData.level-1]}!`);
+                }, 1000);
+            }
         }
 
-        // Tampilkan modal
+        // ==================== MODAL & TOAST ====================
         function showModal(platform, xp) {
             const modal = document.getElementById('xpModal');
             const text = document.getElementById('modalText');
             text.textContent = `Kamu mendapatkan +${xp} XP dari mengunjungi ${platform}!`;
             modal.classList.add('active');
-            
-            // Buat confetti
             createConfetti();
         }
 
-        // Tutup modal
         function closeModal() {
             document.getElementById('xpModal').classList.remove('active');
         }
 
-        // Efek confetti
+        function showWelcomeToast() {
+            // Simple alert untuk demo, bisa diganti dengan toast yang lebih baik
+            console.log(`Selamat datang, ${userData.name}!`);
+        }
+
+        function showStreakToast() {
+            if (userData.streak > 1) {
+                setTimeout(() => {
+                    alert(`🔥 Streak ${userData.streak} hari! Pertahankan!`);
+                }, 1500);
+            }
+        }
+
+        // ==================== FOCUS MODE ====================
+        function startFocusMode() {
+            const duration = prompt(
+                "Mau fokus berapa menit?\n\n" +
+                "10 menit = +10 XP\n" +
+                "25 menit = +30 XP\n" +
+                "50 menit = +60 XP\n\n" +
+                "Masukkan menit:", "25"
+            );
+            
+            if (duration && !isNaN(duration)) {
+                const minutes = parseInt(duration);
+                let xp = 10;
+                if (minutes >= 50) xp = 60;
+                else if (minutes >= 25) xp = 30;
+                
+                alert(`⏱️ Mode Fokus dimulai!\n\nJangan tutup browser selama ${minutes} menit ya!\n\n(Timer berjalan di background)`);
+                
+                // Simulasi untuk demo (2 detik)
+                setTimeout(() => {
+                    userData.totalXP += xp;
+                    userData.studyHours += Math.ceil(minutes / 60 * 10) / 10;
+                    checkLevelUp();
+                    saveData();
+                    updateUIFromData();
+                    alert(`🎉 Selamat! Kamu berhasil fokus ${minutes} menit!\n\n+${xp} XP!`);
+                }, 2000);
+            }
+        }
+
+        // ==================== QUICK ACTIONS ====================
+        function showStats() {
+            alert(
+                `📊 Statistik Belajar\n\n` +
+                `Nama: ${userData.name}\n` +
+                `Level: ${userData.level} (${levelTitles[userData.level-1]})\n` +
+                `Total XP: ${userData.totalXP}\n` +
+                `XP Hari Ini: ${userData.todayXP}\n` +
+                `Streak: ${userData.streak} hari\n` +
+                `Jam Belajar: ${userData.studyHours}\n` +
+                `Platform Dikunjungi: ${userData.visitedPlatforms.length}`
+            );
+        }
+
+        function showLeaderboard() {
+            const friends = [
+                { name: 'Andi', xp: 2450 },
+                { name: 'Budi', xp: 2100 },
+                { name: 'Citra', xp: 1890 },
+                { name: userData.name, xp: userData.totalXP },
+                { name: 'Dedi', xp: 1100 }
+            ];
+            
+            friends.sort((a, b) => b.xp - a.xp);
+            
+            let text = `🏆 Peringkat Minggu Ini\n\n`;
+            friends.forEach((f, i) => {
+                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '•';
+                const isMe = f.name === userData.name ? ' (Kamu)' : '';
+                text += `${medal} ${i+1}. ${f.name}${isMe} - ${f.xp} XP\n`;
+            });
+            
+            alert(text);
+        }
+
+        function showRewards() {
+            alert(
+                `🎁 Hadiah yang Tersedia\n\n` +
+                `🥉 1,000 XP - Badge "Pejuang"\n` +
+                `🥈 2,000 XP - Voucher Ruangguru 30%\n` +
+                `🥇 5,000 XP - Notebook Eksklusif\n` +
+                `💎 10,000 XP - Tablet Belajar\n\n` +
+                `Kamu saat ini: ${userData.totalXP} XP\n` +
+                `Lagi ${Math.max(0, 1000 - userData.totalXP)} XP lagi untuk hadiah pertama!`
+            );
+        }
+
+        function showProfile() {
+            const choice = confirm(
+                `👤 Profil Kamu\n\n` +
+                `Nama: ${userData.name}\n` +
+                `Email: ${userData.email}\n` +
+                `Avatar: ${userData.avatar}\n\n` +
+                `Mau ganti avatar? Klik OK.\n` +
+                `Mau logout? Klik Cancel lalu OK di konfirmasi.`
+            );
+            
+            if (choice) {
+                changeAvatar();
+            } else {
+                if (confirm('Yakin mau logout? Semua data tersimpan di perangkat ini.')) {
+                    // Tidak menghapus data, hanya kembali ke login
+                    showLoginPage();
+                }
+            }
+        }
+
+        function showSettings() {
+            showProfile();
+        }
+
+        // ==================== UTILITIES ====================
+        function saveData() {
+            localStorage.setItem('belajarLevelUser', JSON.stringify(userData));
+        }
+
         function createConfetti() {
             const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
             
@@ -937,73 +1567,6 @@
                 }, i * 30);
             }
         }
-
-        // Mode Fokus
-        function startFocusMode() {
-            const duration = prompt("Mau fokus berapa menit?\n10 menit = +10 XP\n25 menit = +30 XP\n50 menit = +60 XP", "25");
-            
-            if (duration) {
-                const minutes = parseInt(duration);
-                if (minutes >= 10) {
-                    alert(`Mode Fokus dimulai! Jangan tutup browser selama ${minutes} menit ya!`);
-                    // Simulasi countdown
-                    setTimeout(() => {
-                        let xp = 10;
-                        if (minutes >= 50) xp = 60;
-                        else if (minutes >= 25) xp = 30;
-                        
-                        userData.xp += xp;
-                        updateXP();
-                        alert(`Selamat! Kamu berhasil fokus ${minutes} menit! +${xp} XP!`);
-                    }, 2000); // Simulasi 2 detik untuk demo
-                }
-            }
-        }
-
-        // Fungsi quick actions
-        function showStats() {
-            alert(`Statistik Belajar:\n\nTotal XP: ${userData.xp}\nLevel: ${userData.level}\nStreak: ${userData.streak} hari\nXP Hari Ini: ${userData.todayXP}\nPlatform Dikunjungi: ${userData.visitedToday.length}`);
-        }
-
-        function showLeaderboard() {
-            alert("Peringkat Minggu Ini:\n\n1. Andi - 2,450 XP 🥇\n2. Budi - 2,100 XP 🥈\n3. Citra - 1,890 XP 🥉\n4. Kamu - 1,250 XP\n5. Dedi - 1,100 XP");
-        }
-
-        function showRewards() {
-            alert("Hadiah yang Tersedia:\n\n🎁 2,000 XP - Voucher Ruangguru 50%\n🎁 5,000 XP - Notebook Eksklusif\n🎁 10,000 XP - Tablet Belajar\n\nAyo kumpulkan lebih banyak XP!");
-        }
-
-        function showSettings() {
-            const name = prompt("Ganti nama:", "Pembelajar Handal");
-            if (name) {
-                document.querySelector('.user-info h2').textContent = name;
-            }
-        }
-
-        // Cek streak setiap hari (simulasi)
-        function checkDailyStreak() {
-            const lastVisit = localStorage.getItem('lastVisit');
-            const today = new Date().toDateString();
-            
-            if (lastVisit !== today) {
-                if (lastVisit === new Date(Date.now() - 86400000).toDateString()) {
-                    userData.streak++;
-                    alert(`Streak bertambah! ${userData.streak} hari berturut-turut! 🔥`);
-                } else if (lastVisit) {
-                    userData.streak = 1;
-                    alert("Streak reset! Ayo mulai lagi hari ini! 💪");
-                }
-                localStorage.setItem('lastVisit', today);
-                localStorage.setItem('streak', userData.streak);
-            }
-        }
-
-        // Inisialisasi
-        window.onload = function() {
-            checkDailyStreak();
-            // Reset visited platforms setiap hari
-            userData.visitedToday = [];
-        };
     </script>
 </body>
 </html>
