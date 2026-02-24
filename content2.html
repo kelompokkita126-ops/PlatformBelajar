@@ -154,10 +154,6 @@
             box-shadow: 0 10px 20px rgba(74, 111, 165, 0.3);
         }
 
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
         .login-footer {
             text-align: center;
             margin-top: 25px;
@@ -500,6 +496,38 @@
             opacity: 0.95;
         }
 
+        /* Focus Button Section */
+        .focus-section {
+            padding: 0 20px 20px;
+        }
+
+        .btn-focus-main {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--success) 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(42, 157, 143, 0.4);
+        }
+
+        .btn-focus-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 157, 143, 0.6);
+        }
+
+        .btn-focus-main i {
+            font-size: 1.5rem;
+        }
+
         /* Section Title */
         .section-title {
             padding: 0 20px;
@@ -551,12 +579,11 @@
             background: var(--primary);
         }
 
-        .platform-card:nth-child(2)::before { background: #e74c3c; }
-        .platform-card:nth-child(3)::before { background: #3498db; }
-        .platform-card:nth-child(4)::before { background: #9b59b6; }
-        .platform-card:nth-child(5)::before { background: #1abc9c; }
-        .platform-card:nth-child(6)::before { background: #f39c12; }
-        .platform-card:nth-child(7)::before { background: #e67e22; }
+        .platform-card:nth-child(1)::before { background: #e74c3c; }
+        .platform-card:nth-child(2)::before { background: #3498db; }
+        .platform-card:nth-child(3)::before { background: #9b59b6; }
+        .platform-card:nth-child(4)::before { background: #1abc9c; }
+        .platform-card:nth-child(5)::before { background: #f39c12; }
 
         .platform-header {
             display: flex;
@@ -577,12 +604,11 @@
             background: var(--primary);
         }
 
-        .platform-card:nth-child(2) .platform-icon { background: #e74c3c; }
-        .platform-card:nth-child(3) .platform-icon { background: #3498db; }
-        .platform-card:nth-child(4) .platform-icon { background: #9b59b6; }
-        .platform-card:nth-child(5) .platform-icon { background: #1abc9c; }
-        .platform-card:nth-child(6) .platform-icon { background: #f39c12; }
-        .platform-card:nth-child(7) .platform-icon { background: #e67e22; }
+        .platform-card:nth-child(1) .platform-icon { background: #e74c3c; }
+        .platform-card:nth-child(2) .platform-icon { background: #3498db; }
+        .platform-card:nth-child(3) .platform-icon { background: #9b59b6; }
+        .platform-card:nth-child(4) .platform-icon { background: #1abc9c; }
+        .platform-card:nth-child(5) .platform-icon { background: #f39c12; }
 
         .platform-info h3 {
             font-size: 1.1rem;
@@ -634,12 +660,11 @@
             font-size: 0.9rem;
         }
 
-        .platform-card:nth-child(2) .visit-btn { background: #e74c3c; }
-        .platform-card:nth-child(3) .visit-btn { background: #3498db; }
-        .platform-card:nth-child(4) .visit-btn { background: #9b59b6; }
-        .platform-card:nth-child(5) .visit-btn { background: #1abc9c; }
-        .platform-card:nth-child(6) .visit-btn { background: #f39c12; }
-        .platform-card:nth-child(7) .visit-btn { background: #e67e22; }
+        .platform-card:nth-child(1) .visit-btn { background: #e74c3c; }
+        .platform-card:nth-child(2) .visit-btn { background: #3498db; }
+        .platform-card:nth-child(3) .visit-btn { background: #9b59b6; }
+        .platform-card:nth-child(4) .visit-btn { background: #1abc9c; }
+        .platform-card:nth-child(5) .visit-btn { background: #f39c12; }
 
         .visit-btn:hover {
             transform: scale(1.05);
@@ -684,32 +709,7 @@
             font-weight: 600;
         }
 
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent) 0%, #e76f51 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(231, 111, 81, 0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            z-index: 100;
-        }
-
-        .fab:hover {
-            transform: scale(1.1) rotate(90deg);
-        }
-
-        /* Modal */
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -739,14 +739,8 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-icon {
@@ -776,6 +770,148 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .modal-btn.secondary {
+            background: #e0e0e0;
+            color: var(--dark);
+        }
+
+        .modal-btn.danger {
+            background: var(--danger);
+        }
+
+        /* Timer Selection Grid */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .timer-option {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .timer-option:hover {
+            border-color: var(--success);
+            background: #e8f5e9;
+            transform: scale(1.05);
+        }
+
+        .timer-option.selected {
+            border-color: var(--success);
+            background: #c8e6c9;
+        }
+
+        .timer-option i {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .timer-option .time {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--dark);
+            display: block;
+        }
+
+        .timer-option .xp {
+            font-size: 0.9rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Timer Running Screen */
+        .timer-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 100%);
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .timer-screen.active {
+            display: flex;
+        }
+
+        .timer-display {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        .timer-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .timer-progress {
+            width: 80%;
+            max-width: 300px;
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .timer-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success) 0%, #2ecc71 100%);
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .timer-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .timer-btn.stop {
+            background: var(--danger);
+            color: white;
+        }
+
+        .timer-btn:hover {
+            transform: scale(1.05);
         }
 
         /* Confetti Animation */
@@ -790,20 +926,49 @@
         }
 
         @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
+
+        /* Profile Menu Modal */
+        .profile-menu {
+            text-align: left;
+        }
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-menu-item:hover {
+            background: #e0e0e0;
+            transform: translateX(5px);
+        }
+
+        .profile-menu-item i {
+            font-size: 1.3rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .profile-menu-item.change { color: var(--primary); }
+        .profile-menu-item.logout { color: var(--danger); }
+        .profile-menu-item.close { color: var(--dark); }
 
         /* Responsive */
         @media (max-width: 480px) {
             .container {
                 max-width: 100%;
+            }
+            .timer-display {
+                font-size: 3.5rem;
             }
         }
 
@@ -857,10 +1022,7 @@
                 </form>
                 
                 <div class="login-footer">
-                    <p>Belum punya akun? <a href="#" onclick="showRegister()">Daftar gratis</a></p>
-                    <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.7;">
-                        Data tersimpan di perangkat ini (local)
-                    </p>
+                    <p>Data tersimpan di perangkat ini (local)</p>
                 </div>
             </div>
         </div>
@@ -872,24 +1034,12 @@
                 <p>Pilih avatar yang mewakili kamu!</p>
                 
                 <div class="avatar-grid">
-                    <div class="avatar-option" onclick="selectAvatar('👨‍🎓', this)" title="Pelajar Pria">
-                        👨‍🎓
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar('👩‍🎓', this)" title="Pelajar Wanita">
-                        👩‍🎓
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar('🦸', this)" title="Superhero">
-                        🦸
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar('🦄', this)" title="Unicorn">
-                        🦄
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar('🤖', this)" title="Robot">
-                        🤖
-                    </div>
-                    <div class="avatar-option" onclick="selectAvatar('👾', this)" title="Alien">
-                        👾
-                    </div>
+                    <div class="avatar-option" onclick="selectAvatar('👨‍🎓', this)" title="Pelajar Pria">👨‍🎓</div>
+                    <div class="avatar-option" onclick="selectAvatar('👩‍🎓', this)" title="Pelajar Wanita">👩‍🎓</div>
+                    <div class="avatar-option" onclick="selectAvatar('🦸', this)" title="Superhero">🦸</div>
+                    <div class="avatar-option" onclick="selectAvatar('🦄', this)" title="Unicorn">🦄</div>
+                    <div class="avatar-option" onclick="selectAvatar('🤖', this)" title="Robot">🤖</div>
+                    <div class="avatar-option" onclick="selectAvatar('👾', this)" title="Alien">👾</div>
                 </div>
                 
                 <button class="btn-confirm" id="confirmAvatarBtn" onclick="confirmAvatar()" disabled>
@@ -905,23 +1055,19 @@
                 <h1><i class="fas fa-graduation-cap"></i> BelajarLevel</h1>
                 <div class="header-icons">
                     <i class="fas fa-bell"></i>
-                    <i class="fas fa-cog" onclick="showSettings()"></i>
+                    <i class="fas fa-user" onclick="showProfileMenu()"></i>
                 </div>
             </div>
 
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="avatar-container">
-                    <div class="avatar" id="userAvatar" onclick="changeAvatar()">👨‍🎓</div>
-                    <div class="avatar-edit" onclick="changeAvatar()" title="Ganti Avatar">
-                        <i class="fas fa-camera"></i>
-                    </div>
+                    <div class="avatar" id="userAvatar">👨‍🎓</div>
                     <div class="level-badge" id="userLevelBadge">Lv. 1</div>
                 </div>
                 <div class="user-info">
                     <h2 id="displayName">Pembelajar</h2>
                     <p class="user-email" id="displayEmail">email@example.com</p>
-                    <p id="userMotivation">Tetap konsisten untuk naik level!</p>
                     <div class="badge" id="streakBadge">
                         <i class="fas fa-fire"></i> Streak 0 Hari
                     </div>
@@ -937,12 +1083,12 @@
                 <div class="stat-divider"></div>
                 <div class="stat-item">
                     <span class="stat-value" id="studyHours">0</span>
-                    <div class="stat-label">Jam Belajar</div>
+                    <div class="stat-label">Jam Fokus</div>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item">
                     <span class="stat-value" id="visitedCount">0</span>
-                    <div class="stat-label">Web Dikunjungi</div>
+                    <div class="stat-label">Platform</div>
                 </div>
             </div>
 
@@ -961,176 +1107,102 @@
             <div class="streak-alert" id="streakAlert">
                 <div class="streak-icon">🔥</div>
                 <div class="streak-text">
-                    <h3>Streak <span id="streakDays">0</span> Hari Berturut-turut!</h3>
-                    <p>Ayo pertahankan, besok dapat bonus XP!</p>
+                    <h3>Streak <span id="streakDays">0</span> Hari!</h3>
+                    <p>Pertahankan besok untuk bonus XP!</p>
                 </div>
+            </div>
+
+            <!-- Focus Button Section -->
+            <div class="focus-section">
+                <button class="btn-focus-main" onclick="showTimerSelection()">
+                    <i class="fas fa-play-circle"></i> Mulai Fokus
+                </button>
             </div>
 
             <!-- Section Title -->
             <div class="section-title">
                 <i class="fas fa-star"></i>
-                <span>Platform Belajar Pilihan</span>
+                <span>Platform Belajar SNBT</span>
             </div>
 
             <!-- Learning Platforms -->
             <div class="platforms-grid">
-                <!-- Ruangguru -->
-                <div class="platform-card" onclick="visitPlatform('Ruangguru', 50, 'https://www.ruangguru.com')">
+                <!-- Ejaan -->
+                <div class="platform-card" onclick="visitPlatform('Ejaan.web.id', 40, 'https://ejaan.web.id/#pelajari')">
                     <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
+                        <div class="platform-icon"><i class="fas fa-spell-check"></i></div>
                         <div class="platform-info">
-                            <h3>Ruangguru</h3>
-                            <span>SD - SMA</span>
+                            <h3>Ejaan.web.id</h3>
+                            <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">
-                        Platform belajar lengkap dengan video pembelajaran, latihan soal, dan tryout untuk semua jenjang.
-                    </p>
+                    <p class="platform-desc">Latihan soal Bahasa Indonesia dan ejaan yang sering keluar di SNBT.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+50 XP</span>
-                        </div>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+40 XP</span></div>
                         <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                     </div>
                 </div>
 
-                <!-- Zenius -->
-                <div class="platform-card" onclick="visitPlatform('Zenius', 40, 'https://www.zenius.net')">
+                <!-- Aimasukptn -->
+                <div class="platform-card" onclick="visitPlatform('Aimasukptn', 50, 'https://aimasukptn.com/')">
                     <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
+                        <div class="platform-icon"><i class="fas fa-university"></i></div>
                         <div class="platform-info">
-                            <h3>Zenius</h3>
-                            <span>Konsep Dasar</span>
+                            <h3>Aimasukptn</h3>
+                            <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">
-                        Belajar dengan pemahaman konsep, bukan hafalan. Cocok untuk persiapan UTBK dan olimpiade.
-                    </p>
+                    <p class="platform-desc">Platform latihan soal SNBT lengkap dengan pembahasan detail.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+40 XP</span>
-                        </div>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+50 XP</span></div>
                         <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                     </div>
                 </div>
 
-                <!-- Quipper -->
-                <div class="platform-card" onclick="visitPlatform('Quipper', 35, 'https://www.quipper.com')">
+                <!-- BisadandEdu -->
+                <div class="platform-card" onclick="visitPlatform('BisadandEdu', 45, 'https://www.bisadanedu.com/#beranda')">
                     <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-laptop"></i>
-                        </div>
+                        <div class="platform-icon"><i class="fas fa-chalkboard"></i></div>
                         <div class="platform-info">
-                            <h3>Quipper</h3>
-                            <span>Online Learning</span>
+                            <h3>BisadandEdu</h3>
+                            <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">
-                        Platform belajar online dengan guru-guru berpengalaman dan materi yang selalu diperbarui.
-                    </p>
+                    <p class="platform-desc">Belajar online dengan tutor berpengalaman dan materi terstruktur.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+35 XP</span>
-                        </div>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+45 XP</span></div>
                         <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                     </div>
                 </div>
 
-                <!-- Pahamify -->
-                <div class="platform-card" onclick="visitPlatform('Pahamify', 45, 'https://pahamify.com')">
+                <!-- Pegasus Pahamify -->
+                <div class="platform-card" onclick="visitPlatform('Pegasus', 55, 'https://pegasus.pahamify.com/')">
                     <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
+                        <div class="platform-icon"><i class="fas fa-rocket"></i></div>
                         <div class="platform-info">
-                            <h3>Pahamify</h3>
-                            <span>Belajar Seru</span>
+                            <h3>Pegasus Pahamify</h3>
+                            <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">
-                        Belajar jadi seru dengan gamifikasi! Video animasi dan kuis menarik untuk semua mata pelajaran.
-                    </p>
+                    <p class="platform-desc">Bank soal SNBT dari Pahamify dengan sistem belajar adaptif.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+45 XP</span>
-                        </div>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+55 XP</span></div>
                         <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                     </div>
                 </div>
 
-                <!-- Kelas Pintar -->
-                <div class="platform-card" onclick="visitPlatform('Kelas Pintar', 30, 'https://www.kelaspintar.id')">
+                <!-- Google Share -->
+                <div class="platform-card" onclick="visitPlatform('Google Share', 35, 'https://share.google/UQflh7bgmRD1TiFMO')">
                     <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
+                        <div class="platform-icon"><i class="fas fa-share-alt"></i></div>
                         <div class="platform-info">
-                            <h3>Kelas Pintar</h3>
-                            <span>AI Tutor</span>
+                            <h3>Google Share</h3>
+                            <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">
-                        Dampingan belajar dengan AI tutor yang personalisasi sesuai kebutuhan dan gaya belajarmu.
-                    </p>
+                    <p class="platform-desc">Kumpulan materi dan soal SNBT yang dibagikan komunitas belajar.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+30 XP</span>
-                        </div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
-                    </div>
-                </div>
-
-                <!-- Brainly -->
-                <div class="platform-card" onclick="visitPlatform('Brainly', 25, 'https://brainly.co.id')">
-                    <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <div class="platform-info">
-                            <h3>Brainly</h3>
-                            <span>Tanya Jawab</span>
-                        </div>
-                    </div>
-                    <p class="platform-desc">
-                        Komunitas belajar terbesar di Indonesia. Tanya soal sulit dan dapatkan jawaban dari teman lain.
-                    </p>
-                    <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+25 XP</span>
-                        </div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
-                    </div>
-                </div>
-
-                <!-- Coursera -->
-                <div class="platform-card" onclick="visitPlatform('Coursera', 60, 'https://www.coursera.org')">
-                    <div class="platform-header">
-                        <div class="platform-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <div class="platform-info">
-                            <h3>Coursera</h3>
-                            <span>Internasional</span>
-                        </div>
-                    </div>
-                    <p class="platform-desc">
-                        Kursus online dari universitas top dunia seperti Stanford, Yale, dan Google. Sertifikat resmi!
-                    </p>
-                    <div class="platform-footer">
-                        <div class="xp-reward">
-                            <i class="fas fa-bolt"></i>
-                            <span>+60 XP</span>
-                        </div>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+35 XP</span></div>
                         <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
                     </div>
                 </div>
@@ -1150,26 +1222,115 @@
                     <i class="fas fa-trophy"></i>
                     <span>Peringkat</span>
                 </a>
-                <a href="#" class="action-btn" onclick="showRewards()">
-                    <i class="fas fa-gift"></i>
-                    <span>Hadiah</span>
-                </a>
-                <a href="#" class="action-btn" onclick="showProfile()">
-                    <i class="fas fa-user-cog"></i>
-                    <span>Profil</span>
-                </a>
             </div>
 
-            <!-- Spacer for bottom -->
-            <div style="height: 100px;"></div>
+            <!-- Spacer -->
+            <div style="height: 50px;"></div>
         </div>
 
-        <!-- Floating Action Button -->
-        <button class="fab" onclick="startFocusMode()" title="Mode Fokus">
-            <i class="fas fa-play"></i>
-        </button>
+        <!-- ==================== TIMER SELECTION MODAL ==================== -->
+        <div class="modal" id="timerSelectionModal">
+            <div class="modal-content">
+                <div class="modal-icon">⏱️</div>
+                <h2>Pilih Durasi Fokus</h2>
+                <p>Sesi fokus akan berjalan di background. Jangan tutup browser!</p>
+                
+                <div class="timer-grid">
+                    <div class="timer-option" onclick="selectTimer(10, this)">
+                        <i class="fas fa-clock"></i>
+                        <span class="time">10 Menit</span>
+                        <span class="xp">+10 XP</span>
+                    </div>
+                    <div class="timer-option" onclick="selectTimer(20, this)">
+                        <i class="fas fa-clock"></i>
+                        <span class="time">20 Menit</span>
+                        <span class="xp">+20 XP</span>
+                    </div>
+                    <div class="timer-option" onclick="selectTimer(30, this)">
+                        <i class="fas fa-clock"></i>
+                        <span class="time">30 Menit</span>
+                        <span class="xp">+35 XP</span>
+                    </div>
+                    <div class="timer-option" onclick="selectTimer(60, this)">
+                        <i class="fas fa-clock"></i>
+                        <span class="time">60 Menit</span>
+                        <span class="xp">+75 XP</span>
+                    </div>
+                </div>
+                
+                <button class="modal-btn" id="startTimerBtn" onclick="startFocusTimer()" disabled>
+                    Mulai Sekarang
+                </button>
+                <button class="modal-btn secondary" onclick="closeModal('timerSelectionModal')">
+                    Batal
+                </button>
+            </div>
+        </div>
 
-        <!-- XP Modal -->
+        <!-- ==================== TIMER RUNNING SCREEN ==================== -->
+        <div class="timer-screen" id="timerScreen">
+            <div class="timer-label">Sedang Fokus...</div>
+            <div class="timer-display" id="timerDisplay">00:00</div>
+            <div class="timer-progress">
+                <div class="timer-progress-fill" id="timerProgressFill" style="width: 100%"></div>
+            </div>
+            <div class="timer-label" id="timerStatus">Semangat! Jangan buka aplikasi lain.</div>
+            <div class="timer-controls">
+                <button class="timer-btn stop" onclick="stopTimer()">
+                    <i class="fas fa-stop"></i> Berhenti
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== TIMER FINISHED MODAL ==================== -->
+        <div class="modal" id="timerFinishedModal">
+            <div class="modal-content">
+                <div class="modal-icon">🎉</div>
+                <h2>Waktu Habis!</h2>
+                <p id="finishedText">Kamu berhasil fokus!</p>
+                <button class="modal-btn" onclick="continueTimer()">
+                    <i class="fas fa-redo"></i> Lanjut Lagi
+                </button>
+                <button class="modal-btn secondary" onclick="exitTimer()">
+                    <i class="fas fa-check"></i> Keluar
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== PROFILE MENU MODAL ==================== -->
+        <div class="modal" id="profileMenuModal">
+            <div class="modal-content profile-menu">
+                <h2 style="text-align: center; margin-bottom: 20px;">
+                    <i class="fas fa-user-circle"></i> Menu Profil
+                </h2>
+                
+                <div class="profile-menu-item close" onclick="closeModal('profileMenuModal')">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>OK</strong>
+                        <p style="font-size: 0.85rem; color: #666; margin: 0;">Menutup menu profil</p>
+                    </div>
+                </div>
+                
+                <div class="profile-menu-item change" onclick="changeAvatarFromMenu()">
+                    <i class="fas fa-user-edit"></i>
+                    <div>
+                        <strong>Ganti</strong>
+                        <p style="font-size: 0.85rem; color: #666; margin: 0;">Ganti avatar karakter</p>
+                    </div>
+                </div>
+                
+                <div class="profile-menu-item logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <div>
+                        <strong>Keluar</strong>
+                        <p style="font-size: 0.85rem; color: #666; margin: 0;">Keluar dari aplikasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== XP MODAL ==================== -->
         <div class="modal" id="xpModal">
             <div class="modal-content">
                 <div class="modal-icon">
@@ -1177,7 +1338,7 @@
                 </div>
                 <h2>XP Didapat!</h2>
                 <p id="modalText">Kamu mendapatkan +50 XP!</p>
-                <button class="modal-btn" onclick="closeModal()">Lanjutkan <i class="fas fa-arrow-right"></i></button>
+                <button class="modal-btn" onclick="closeModal('xpModal')">Lanjutkan <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -1190,17 +1351,20 @@
             email: '',
             avatar: '👨‍🎓',
             level: 1,
-            xp: 0,
             totalXP: 0,
             streak: 0,
             todayXP: 0,
-            studyHours: 0,
+            focusMinutes: 0,
             visitedPlatforms: [],
             visitedToday: [],
             lastVisit: null
         };
 
         let tempAvatar = null;
+        let selectedTimerMinutes = 0;
+        let timerInterval = null;
+        let timerSeconds = 0;
+        let totalTimerSeconds = 0;
 
         const levelThresholds = [0, 100, 250, 500, 1000, 2000];
         const levelTitles = ['Pemula', 'Petualang', 'Pejuang', 'Jawara', 'Legenda', 'Master'];
@@ -1235,48 +1399,33 @@
         function showMainApp() {
             hideAllPages();
             document.getElementById('mainApp').style.display = 'block';
-            document.querySelector('.fab').style.display = 'flex';
         }
 
         function hideAllPages() {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('avatarPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'none';
-            document.querySelector('.fab').style.display = 'none';
+            document.getElementById('timerScreen').classList.remove('active');
         }
 
         // ==================== LOGIN ====================
         function handleLogin(e) {
             e.preventDefault();
-            
             const name = document.getElementById('userName').value.trim();
             const email = document.getElementById('userEmail').value.trim();
             
             if (name && email) {
                 userData.name = name;
                 userData.email = email;
-                
-                // Simpan sementara, tunggu pilih avatar
                 showAvatarPage();
             }
         }
 
-        function showRegister() {
-            alert('Fitur daftar: Masukkan nama dan email, lalu pilih avatar untuk memulai!');
-        }
-
         // ==================== AVATAR SELECTION ====================
         function selectAvatar(emoji, element) {
-            // Remove selected class from all
-            document.querySelectorAll('.avatar-option').forEach(el => {
-                el.classList.remove('selected');
-            });
-            
-            // Add to clicked
+            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             tempAvatar = emoji;
-            
-            // Enable confirm button
             document.getElementById('confirmAvatarBtn').disabled = false;
         }
 
@@ -1286,41 +1435,31 @@
                 saveData();
                 updateUIFromData();
                 showMainApp();
-                showWelcomeToast();
             }
         }
 
-        function changeAvatar() {
-            // Reset selection
+        function changeAvatarFromMenu() {
+            closeModal('profileMenuModal');
             tempAvatar = userData.avatar;
             document.querySelectorAll('.avatar-option').forEach(el => {
                 el.classList.remove('selected');
-                if (el.textContent.trim() === userData.avatar) {
-                    el.classList.add('selected');
-                }
+                if (el.textContent.trim() === userData.avatar) el.classList.add('selected');
             });
             document.getElementById('confirmAvatarBtn').disabled = false;
-            
             showAvatarPage();
         }
 
         // ==================== UI UPDATES ====================
         function updateUIFromData() {
-            // Profile
             document.getElementById('userAvatar').textContent = userData.avatar;
             document.getElementById('displayName').textContent = userData.name;
             document.getElementById('displayEmail').textContent = userData.email;
             document.getElementById('userLevelBadge').textContent = `Lv. ${userData.level}`;
-            
-            // Stats
             document.getElementById('totalXP').textContent = userData.totalXP;
-            document.getElementById('studyHours').textContent = userData.studyHours;
+            document.getElementById('focusMinutes').textContent = Math.floor(userData.focusMinutes / 60);
             document.getElementById('visitedCount').textContent = userData.visitedPlatforms.length;
             
-            // XP Bar
             updateXPBar();
-            
-            // Streak
             updateStreak();
         }
 
@@ -1331,7 +1470,7 @@
             const xpNeeded = nextLevelXP - currentLevelBase;
             const progress = Math.min((xpInLevel / xpNeeded) * 100, 100);
             
-            document.getElementById('progressLabel').textContent = `Progress Level ${userData.level + 1} (${levelTitles[userData.level]})`;
+            document.getElementById('progressLabel').textContent = `Level ${userData.level} (${levelTitles[userData.level-1]})`;
             document.getElementById('progressText').textContent = `${xpInLevel} / ${xpNeeded} XP`;
             document.getElementById('xpProgressBar').style.width = `${progress}%`;
         }
@@ -1339,74 +1478,146 @@
         function updateStreak() {
             document.getElementById('streakDays').textContent = userData.streak;
             document.getElementById('streakBadge').innerHTML = `<i class="fas fa-fire"></i> Streak ${userData.streak} Hari`;
+            document.getElementById('streakAlert').style.display = userData.streak > 0 ? 'flex' : 'none';
+        }
+
+        // ==================== TIMER FOKUS ====================
+        function showTimerSelection() {
+            selectedTimerMinutes = 0;
+            document.querySelectorAll('.timer-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('startTimerBtn').disabled = true;
+            document.getElementById('timerSelectionModal').classList.add('active');
+        }
+
+        function selectTimer(minutes, element) {
+            document.querySelectorAll('.timer-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedTimerMinutes = minutes;
+            document.getElementById('startTimerBtn').disabled = false;
+        }
+
+        function startFocusTimer() {
+            if (selectedTimerMinutes === 0) return;
             
-            if (userData.streak > 0) {
-                document.getElementById('streakAlert').style.display = 'flex';
-            } else {
-                document.getElementById('streakAlert').style.display = 'none';
+            closeModal('timerSelectionModal');
+            timerSeconds = selectedTimerMinutes * 60;
+            totalTimerSeconds = timerSeconds;
+            
+            document.getElementById('timerScreen').classList.add('active');
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                updateTimerDisplay();
+                
+                const progress = (timerSeconds / totalTimerSeconds) * 100;
+                document.getElementById('timerProgressFill').style.width = progress + '%';
+                
+                if (timerSeconds <= 0) {
+                    finishTimer();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function stopTimer() {
+            if (confirm('Yakin ingin menghentikan sesi fokus? XP tidak akan didapatkan.')) {
+                clearInterval(timerInterval);
+                document.getElementById('timerScreen').classList.remove('active');
             }
+        }
+
+        function finishTimer() {
+            clearInterval(timerInterval);
+            
+            // Calculate XP
+            let xp = 10;
+            if (selectedTimerMinutes >= 60) xp = 75;
+            else if (selectedTimerMinutes >= 30) xp = 35;
+            else if (selectedTimerMinutes >= 20) xp = 20;
+            
+            // Add XP
+            userData.totalXP += xp;
+            userData.todayXP += xp;
+            userData.focusMinutes += selectedTimerMinutes;
+            
+            // Update streak
+            updateStreakOnActivity();
+            
+            checkLevelUp();
+            saveData();
+            updateUIFromData();
+            
+            // Show finished modal
+            document.getElementById('finishedText').textContent = 
+                `Kamu berhasil fokus ${selectedTimerMinutes} menit! +${xp} XP!`;
+            document.getElementById('timerFinishedModal').classList.add('active');
+            createConfetti();
+        }
+
+        function continueTimer() {
+            closeModal('timerFinishedModal');
+            document.getElementById('timerScreen').classList.remove('active');
+            showTimerSelection();
+        }
+
+        function exitTimer() {
+            closeModal('timerFinishedModal');
+            document.getElementById('timerScreen').classList.remove('active');
         }
 
         // ==================== PLATFORM VISIT ====================
         function visitPlatform(name, xp, url) {
-            // Cek apakah sudah dikunjungi hari ini
             const today = new Date().toDateString();
-            const lastVisit = userData.lastVisit;
             
-            // Reset visitedToday jika hari baru
-            if (lastVisit !== today) {
+            if (userData.lastVisit !== today) {
                 userData.visitedToday = [];
                 userData.todayXP = 0;
-                
-                // Update streak
-                if (lastVisit) {
-                    const lastDate = new Date(lastVisit);
-                    const todayDate = new Date();
-                    const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
-                    
-                    if (diffDays === 1) {
-                        userData.streak++;
-                        showStreakToast();
-                    } else if (diffDays > 1) {
-                        userData.streak = 1;
-                    }
-                } else {
-                    userData.streak = 1;
-                }
-                
+                updateStreakOnActivity();
                 userData.lastVisit = today;
             }
             
-            // Cek double visit
             if (userData.visitedToday.includes(name)) {
-                alert(`Kamu sudah mengunjungi ${name} hari ini! Coba platform lain ya.`);
+                alert(`Kamu sudah mengunjungi ${name} hari ini!`);
                 return;
             }
             
-            // Tambah XP
             userData.totalXP += xp;
             userData.todayXP += xp;
-            userData.xp += xp;
             userData.visitedToday.push(name);
             
             if (!userData.visitedPlatforms.includes(name)) {
                 userData.visitedPlatforms.push(name);
             }
             
-            // Cek level up
             checkLevelUp();
-            
-            // Simpan dan update UI
             saveData();
             updateUIFromData();
             
-            // Tampilkan modal
-            showModal(name, xp);
+            document.getElementById('modalText').textContent = `Kamu mendapatkan +${xp} XP dari ${name}!`;
+            document.getElementById('xpModal').classList.add('active');
+            createConfetti();
             
-            // Buka platform
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 800);
+            setTimeout(() => window.open(url, '_blank'), 800);
+        }
+
+        function updateStreakOnActivity() {
+            const lastDate = userData.lastVisit ? new Date(userData.lastVisit) : null;
+            const today = new Date();
+            
+            if (!lastDate) {
+                userData.streak = 1;
+            } else {
+                const diffDays = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+                if (diffDays === 1) userData.streak++;
+                else if (diffDays > 1) userData.streak = 1;
+            }
         }
 
         function checkLevelUp() {
@@ -1414,79 +1625,28 @@
             if (nextLevelXP && userData.totalXP >= nextLevelXP) {
                 userData.level++;
                 setTimeout(() => {
-                    alert(`🎉 Selamat! Kamu naik ke Level ${userData.level} - ${levelTitles[userData.level-1]}!`);
-                }, 1000);
+                    alert(`🎉 Level Up! Kamu sekarang Level ${userData.level} - ${levelTitles[userData.level-1]}!`);
+                }, 500);
             }
         }
 
-        // ==================== MODAL & TOAST ====================
-        function showModal(platform, xp) {
-            const modal = document.getElementById('xpModal');
-            const text = document.getElementById('modalText');
-            text.textContent = `Kamu mendapatkan +${xp} XP dari mengunjungi ${platform}!`;
-            modal.classList.add('active');
-            createConfetti();
+        // ==================== PROFILE MENU ====================
+        function showProfileMenu() {
+            document.getElementById('profileMenuModal').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('xpModal').classList.remove('active');
-        }
-
-        function showWelcomeToast() {
-            // Simple alert untuk demo, bisa diganti dengan toast yang lebih baik
-            console.log(`Selamat datang, ${userData.name}!`);
-        }
-
-        function showStreakToast() {
-            if (userData.streak > 1) {
-                setTimeout(() => {
-                    alert(`🔥 Streak ${userData.streak} hari! Pertahankan!`);
-                }, 1500);
-            }
-        }
-
-        // ==================== FOCUS MODE ====================
-        function startFocusMode() {
-            const duration = prompt(
-                "Mau fokus berapa menit?\n\n" +
-                "10 menit = +10 XP\n" +
-                "25 menit = +30 XP\n" +
-                "50 menit = +60 XP\n\n" +
-                "Masukkan menit:", "25"
-            );
-            
-            if (duration && !isNaN(duration)) {
-                const minutes = parseInt(duration);
-                let xp = 10;
-                if (minutes >= 50) xp = 60;
-                else if (minutes >= 25) xp = 30;
-                
-                alert(`⏱️ Mode Fokus dimulai!\n\nJangan tutup browser selama ${minutes} menit ya!\n\n(Timer berjalan di background)`);
-                
-                // Simulasi untuk demo (2 detik)
-                setTimeout(() => {
-                    userData.totalXP += xp;
-                    userData.studyHours += Math.ceil(minutes / 60 * 10) / 10;
-                    checkLevelUp();
-                    saveData();
-                    updateUIFromData();
-                    alert(`🎉 Selamat! Kamu berhasil fokus ${minutes} menit!\n\n+${xp} XP!`);
-                }, 2000);
+        function logout() {
+            if (confirm('Yakin mau keluar? Data tetap tersimpan.')) {
+                closeModal('profileMenuModal');
+                showLoginPage();
             }
         }
 
         // ==================== QUICK ACTIONS ====================
         function showStats() {
-            alert(
-                `📊 Statistik Belajar\n\n` +
-                `Nama: ${userData.name}\n` +
-                `Level: ${userData.level} (${levelTitles[userData.level-1]})\n` +
-                `Total XP: ${userData.totalXP}\n` +
-                `XP Hari Ini: ${userData.todayXP}\n` +
-                `Streak: ${userData.streak} hari\n` +
-                `Jam Belajar: ${userData.studyHours}\n` +
-                `Platform Dikunjungi: ${userData.visitedPlatforms.length}`
-            );
+            const hours = Math.floor(userData.focusMinutes / 60);
+            const mins = userData.focusMinutes % 60;
+            alert(`📊 Statistik\n\nNama: ${userData.name}\nLevel: ${userData.level}\nTotal XP: ${userData.totalXP}\nWaktu Fokus: ${hours}j ${mins}m\nStreak: ${userData.streak} hari`);
         }
 
         function showLeaderboard() {
@@ -1497,56 +1657,22 @@
                 { name: userData.name, xp: userData.totalXP },
                 { name: 'Dedi', xp: 1100 }
             ];
-            
             friends.sort((a, b) => b.xp - a.xp);
             
-            let text = `🏆 Peringkat Minggu Ini\n\n`;
+            let text = '🏆 Peringkat\n\n';
             friends.forEach((f, i) => {
                 const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '•';
                 const isMe = f.name === userData.name ? ' (Kamu)' : '';
                 text += `${medal} ${i+1}. ${f.name}${isMe} - ${f.xp} XP\n`;
             });
-            
             alert(text);
         }
 
-        function showRewards() {
-            alert(
-                `🎁 Hadiah yang Tersedia\n\n` +
-                `🥉 1,000 XP - Badge "Pejuang"\n` +
-                `🥈 2,000 XP - Voucher Ruangguru 30%\n` +
-                `🥇 5,000 XP - Notebook Eksklusif\n` +
-                `💎 10,000 XP - Tablet Belajar\n\n` +
-                `Kamu saat ini: ${userData.totalXP} XP\n` +
-                `Lagi ${Math.max(0, 1000 - userData.totalXP)} XP lagi untuk hadiah pertama!`
-            );
-        }
-
-        function showProfile() {
-            const choice = confirm(
-                `👤 Profil Kamu\n\n` +
-                `Nama: ${userData.name}\n` +
-                `Email: ${userData.email}\n` +
-                `Avatar: ${userData.avatar}\n\n` +
-                `Mau ganti avatar? Klik OK.\n` +
-                `Mau logout? Klik Cancel lalu OK di konfirmasi.`
-            );
-            
-            if (choice) {
-                changeAvatar();
-            } else {
-                if (confirm('Yakin mau logout? Semua data tersimpan di perangkat ini.')) {
-                    // Tidak menghapus data, hanya kembali ke login
-                    showLoginPage();
-                }
-            }
-        }
-
-        function showSettings() {
-            showProfile();
-        }
-
         // ==================== UTILITIES ====================
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
         function saveData() {
             localStorage.setItem('belajarLevelUser', JSON.stringify(userData));
         }
@@ -1562,7 +1688,6 @@
                     confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     document.body.appendChild(confetti);
-                    
                     setTimeout(() => confetti.remove(), 4000);
                 }, i * 30);
             }
