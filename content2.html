@@ -172,6 +172,10 @@
             padding: 20px;
         }
 
+        .avatar-selection.active {
+            display: flex;
+        }
+
         .avatar-box {
             background: white;
             border-radius: 30px;
@@ -224,7 +228,6 @@
             border-color: var(--success);
             background: #e8f5e9;
             box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
-            transform: scale(1.05);
         }
 
         .btn-confirm {
@@ -253,6 +256,10 @@
         /* ==================== MAIN APP ==================== */
         .main-app {
             display: none;
+        }
+
+        .main-app.active {
+            display: block;
         }
 
         /* Header */
@@ -314,7 +321,6 @@
             border: 4px solid var(--accent);
             cursor: pointer;
             transition: all 0.3s;
-            user-select: none;
         }
 
         .avatar:hover {
@@ -713,6 +719,8 @@
             width: 100%;
             text-align: center;
             animation: slideUpModal 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes slideUpModal {
@@ -812,6 +820,85 @@
             font-size: 0.9rem;
             color: var(--success);
             font-weight: 600;
+        }
+
+        /* Floating Timer Widget */
+        .floating-timer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--success);
+        }
+
+        .floating-timer.active {
+            display: flex;
+        }
+
+        .floating-timer:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .floating-timer .timer-icon {
+            font-size: 1.5rem;
+            color: var(--success);
+            animation: pulse-icon 1.5s infinite;
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .floating-timer .timer-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .floating-timer .timer-count {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .floating-timer .timer-label-small {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .floating-timer .timer-expand {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+        }
+
+        .floating-timer.minimized {
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .floating-timer.minimized .timer-info,
+        .floating-timer.minimized .timer-expand {
+            display: none;
         }
 
         /* Timer Running Screen */
@@ -942,6 +1029,7 @@
         @media (max-width: 480px) {
             .container { max-width: 100%; }
             .timer-display { font-size: 3.5rem; }
+            .floating-timer { bottom: 10px; right: 10px; }
         }
 
         /* Leaderboard Styles */
@@ -1005,6 +1093,78 @@
         }
 
         .hidden { display: none !important; }
+
+        /* Platform Detail Modal */
+        .platform-detail-content {
+            text-align: left;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .platform-detail-content h3 {
+            color: var(--primary);
+            margin: 15px 0 10px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-detail-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+
+        .platform-detail-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .platform-detail-content li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .platform-meta {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .platform-meta-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .platform-meta-item:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+            font-weight: bold;
+            color: var(--success);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-group .modal-btn {
+            flex: 1;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -1048,15 +1208,15 @@
                 <p>Pilih avatar yang mewakili kamu!</p>
                 
                 <div class="avatar-grid">
-                    <div class="avatar-option" onclick="selectAvatar('👨‍🎓', this)" title="Pelajar Pria">👨‍🎓</div>
-                    <div class="avatar-option" onclick="selectAvatar('👩‍🎓', this)" title="Pelajar Wanita">👩‍🎓</div>
-                    <div class="avatar-option" onclick="selectAvatar('🦸', this)" title="Superhero">🦸</div>
-                    <div class="avatar-option" onclick="selectAvatar('🦄', this)" title="Unicorn">🦄</div>
-                    <div class="avatar-option" onclick="selectAvatar('🤖', this)" title="Robot">🤖</div>
-                    <div class="avatar-option" onclick="selectAvatar('👾', this)" title="Alien">👾</div>
+                    <div class="avatar-option" onclick="selectAvatar('👨‍🎓', this)">👨‍🎓</div>
+                    <div class="avatar-option" onclick="selectAvatar('👩‍🎓', this)">👩‍🎓</div>
+                    <div class="avatar-option" onclick="selectAvatar('🦸', this)">🦸</div>
+                    <div class="avatar-option" onclick="selectAvatar('🦄', this)">🦄</div>
+                    <div class="avatar-option" onclick="selectAvatar('🤖', this)">🤖</div>
+                    <div class="avatar-option" onclick="selectAvatar('👾', this)">👾</div>
                 </div>
                 
-                <button class="btn-confirm" id="btnKonfirmasiAvatar" onclick="konfirmasiPilihanAvatar()" disabled>
+                <button class="btn-confirm" id="confirmAvatarBtn" onclick="confirmAvatar()" disabled>
                     <i class="fas fa-check"></i> Konfirmasi Pilihan
                 </button>
             </div>
@@ -1075,7 +1235,7 @@
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="avatar-container">
-                    <div class="avatar" id="userAvatar" onclick="gantiAvatarDariProfil()">👨‍🎓</div>
+                    <div class="avatar" id="userAvatar">👨‍🎓</div>
                     <div class="level-badge" id="userLevelBadge">Lv. 1</div>
                 </div>
                 <div class="user-info">
@@ -1141,7 +1301,7 @@
             <!-- Learning Platforms -->
             <div class="platforms-grid">
                 <!-- Ejaan -->
-                <div class="platform-card" onclick="visitPlatform('Ejaan.web.id', 40, 'https://ejaan.web.id/#pelajari')">
+                <div class="platform-card" onclick="showPlatformDetail('ejaan')">
                     <div class="platform-header">
                         <div class="platform-icon"><i class="fas fa-spell-check"></i></div>
                         <div class="platform-info">
@@ -1152,12 +1312,12 @@
                     <p class="platform-desc">Latihan soal Bahasa Indonesia dan ejaan yang sering keluar di SNBT.</p>
                     <div class="platform-footer">
                         <div class="xp-reward"><i class="fas fa-bolt"></i><span>+40 XP</span></div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                        <button class="visit-btn">Detail <i class="fas fa-info-circle"></i></button>
                     </div>
                 </div>
 
                 <!-- Aimasukptn -->
-                <div class="platform-card" onclick="visitPlatform('Aimasukptn', 50, 'https://aimasukptn.com/')">
+                <div class="platform-card" onclick="showPlatformDetail('aimasukptn')">
                     <div class="platform-header">
                         <div class="platform-icon"><i class="fas fa-university"></i></div>
                         <div class="platform-info">
@@ -1168,12 +1328,12 @@
                     <p class="platform-desc">Platform latihan soal SNBT lengkap dengan pembahasan detail.</p>
                     <div class="platform-footer">
                         <div class="xp-reward"><i class="fas fa-bolt"></i><span>+50 XP</span></div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                        <button class="visit-btn">Detail <i class="fas fa-info-circle"></i></button>
                     </div>
                 </div>
 
                 <!-- BisadandEdu -->
-                <div class="platform-card" onclick="visitPlatform('BisadandEdu', 45, 'https://www.bisadanedu.com/#beranda')">
+                <div class="platform-card" onclick="showPlatformDetail('bisadanedu')">
                     <div class="platform-header">
                         <div class="platform-icon"><i class="fas fa-chalkboard"></i></div>
                         <div class="platform-info">
@@ -1184,12 +1344,12 @@
                     <p class="platform-desc">Belajar online dengan tutor berpengalaman dan materi terstruktur.</p>
                     <div class="platform-footer">
                         <div class="xp-reward"><i class="fas fa-bolt"></i><span>+45 XP</span></div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                        <button class="visit-btn">Detail <i class="fas fa-info-circle"></i></button>
                     </div>
                 </div>
 
                 <!-- Pegasus Pahamify -->
-                <div class="platform-card" onclick="visitPlatform('Pegasus', 55, 'https://pegasus.pahamify.com/')">
+                <div class="platform-card" onclick="showPlatformDetail('pegasus')">
                     <div class="platform-header">
                         <div class="platform-icon"><i class="fas fa-rocket"></i></div>
                         <div class="platform-info">
@@ -1200,23 +1360,23 @@
                     <p class="platform-desc">Bank soal SNBT dari Pahamify dengan sistem belajar adaptif.</p>
                     <div class="platform-footer">
                         <div class="xp-reward"><i class="fas fa-bolt"></i><span>+55 XP</span></div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                        <button class="visit-btn">Detail <i class="fas fa-info-circle"></i></button>
                     </div>
                 </div>
 
-                <!-- Google Share -->
-                <div class="platform-card" onclick="visitPlatform('Google Share', 35, 'https://share.google/UQflh7bgmRD1TiFMO')">
+                <!-- Sainsin -->
+                <div class="platform-card" onclick="showPlatformDetail('sainsin')">
                     <div class="platform-header">
-                        <div class="platform-icon"><i class="fas fa-share-alt"></i></div>
+                        <div class="platform-icon"><i class="fas fa-flask"></i></div>
                         <div class="platform-info">
-                            <h3>Google Share</h3>
+                            <h3>Sainsin.com</h3>
                             <span>SNBT</span>
                         </div>
                     </div>
-                    <p class="platform-desc">Kumpulan materi dan soal SNBT yang dibagikan komunitas belajar.</p>
+                    <p class="platform-desc">Tryout online dengan peringkat dan pembahasan lengkap.</p>
                     <div class="platform-footer">
-                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+35 XP</span></div>
-                        <button class="visit-btn">Kunjungi <i class="fas fa-external-link-alt"></i></button>
+                        <div class="xp-reward"><i class="fas fa-bolt"></i><span>+40 XP</span></div>
+                        <button class="visit-btn">Detail <i class="fas fa-info-circle"></i></button>
                     </div>
                 </div>
             </div>
@@ -1238,6 +1398,20 @@
             </div>
 
             <div style="height: 50px;"></div>
+        </div>
+
+        <!-- ==================== FLOATING TIMER WIDGET ==================== -->
+        <div class="floating-timer" id="floatingTimer" onclick="toggleFloatingTimer()">
+            <div class="timer-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="timer-info">
+                <span class="timer-count" id="floatingTimerDisplay">00:00</span>
+                <span class="timer-label-small">Sesi Fokus</span>
+            </div>
+            <button class="timer-expand" onclick="event.stopPropagation(); expandTimer()">
+                <i class="fas fa-expand"></i>
+            </button>
         </div>
 
         <!-- ==================== TIMER SELECTION MODAL ==================== -->
@@ -1288,6 +1462,9 @@
             </div>
             <div class="timer-label" id="timerStatus">Semangat! Tetap fokus ya!</div>
             <div class="timer-controls">
+                <button class="timer-btn" onclick="minimizeTimer()">
+                    <i class="fas fa-compress"></i> Kecilkan
+                </button>
                 <button class="timer-btn stop" onclick="stopTimer()">
                     <i class="fas fa-stop"></i> Berhenti
                 </button>
@@ -1342,6 +1519,13 @@
             </div>
         </div>
 
+        <!-- ==================== PLATFORM DETAIL MODAL ==================== -->
+        <div class="modal" id="platformDetailModal">
+            <div class="modal-content platform-detail-content" id="platformDetailContent">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+
         <!-- ==================== LEADERBOARD MODAL ==================== -->
         <div class="modal" id="leaderboardModal">
             <div class="modal-content">
@@ -1390,17 +1574,97 @@
             dailyHistory: []
         };
 
-        // Variabel untuk avatar yang dipilih sementara
-        let selectedAvatarTemp = null;
-
-        // Variabel untuk timer
+        let tempAvatar = null;
         let selectedTimerMinutes = 0;
         let timerInterval = null;
         let timerSeconds = 0;
         let totalTimerSeconds = 0;
+        let isTimerRunning = false;
+        let isTimerMinimized = false;
 
         const levelThresholds = [0, 100, 250, 500, 1000, 2000];
         const levelTitles = ['Pemula', 'Petualang', 'Pejuang', 'Jawara', 'Legenda', 'Master'];
+
+        // Data platform lengkap dengan uraian materi
+        const platformData = {
+            ejaan: {
+                name: 'Ejaan.web.id',
+                url: 'https://ejaan.web.id/#pelajari',
+                xp: 40,
+                icon: 'fa-spell-check',
+                color: '#e74c3c',
+                description: 'Website ini menyediakan materi belajar tentang aturan ejaan bahasa Indonesia (EYD / PUEBI) yang sangat lengkap.',
+                materials: [
+                    'Penggunaan huruf (kapital, miring, tebal)',
+                    'Penulisan kata (kata dasar, kata turunan, partikel, singkatan, dsb)',
+                    'Tanda baca lengkap (titik, koma, tanda hubung, tanda petik, elipsis, dll)',
+                    'Latihan mini tryout UTBK khusus subtes PBM (Pemahaman Bacaan & Menulis)',
+                    'Artikel tambahan seperti cara menentukan topik bacaan, cara menyimpulkan isi bacaan, jenis paragraf, cara menulis daftar pustaka, dan aturan ejaan lainnya'
+                ]
+            },
+            aimasukptn: {
+                name: 'Aimasukptn',
+                url: 'https://aimasukptn.com/',
+                xp: 50,
+                icon: 'fa-university',
+                color: '#3498db',
+                description: 'Platform ini dirancang untuk persiapan SNBT/UTBK 2026 dengan fitur lengkap.',
+                materials: [
+                    'Bank soal lengkap SNBT & TKA (Tes Keterampilan Akademik)',
+                    'Latihan soal dengan pembahasan detail',
+                    'Tryout simulasi SNBT setiap minggu',
+                    'Sistem progress belajar untuk melihat kemampuan dari waktu ke waktu',
+                    'AI Tutor (Kak-AI) yang membantu menjawab pertanyaan belajar kapan saja',
+                    'Materi pelajaran untuk setiap subtes UTBK (PBM, LBI, PK, PPU, dll)'
+                ]
+            },
+            bisadanedu: {
+                name: 'BisadandEdu',
+                url: 'https://www.bisadanedu.com/#beranda',
+                xp: 45,
+                icon: 'fa-chalkboard',
+                color: '#9b59b6',
+                description: 'Platform belajar online komprehensif untuk berbagai jenjang dan keperluan.',
+                materials: [
+                    'TKA SMP - Persiapan masuk SMA favorit',
+                    'TKA SMA - Persiapan SNBT/UTBK',
+                    'SNBT - Latihan soal seleksi nasional',
+                    'SKD - Seleksi Kompetensi Dasar',
+                    'BUMN - Persiapan tes BUMN',
+                    'PSIKOTES (Segera Hadir)',
+                    'TOEFL - Persiapan tes kemampuan Bahasa Inggris'
+                ]
+            },
+            pegasus: {
+                name: 'Pegasus Pahamify',
+                url: 'https://pegasus.pahamify.com/',
+                xp: 55,
+                icon: 'fa-rocket',
+                color: '#1abc9c',
+                description: 'Fitur khusus dari Pahamify dengan sistem belajar adaptif dan personal.',
+                materials: [
+                    'Latihan soal UTBK yang disusun personal berdasarkan kemampuanmu',
+                    'Pengukuran progres belajar dari hari ke hari',
+                    'Rekomendasi soal yang perlu kamu kerjakan',
+                    'Sistem pembelajaran dengan bantuan AI atau robot pembimbing',
+                    'Soal jenis HOTS, MOTS, LOTS untuk melatih kemampuan tingkat tinggi dan rendah'
+                ]
+            },
+            sainsin: {
+                name: 'Sainsin.com',
+                url: 'https://sainsin.com/',
+                xp: 40,
+                icon: 'fa-flask',
+                color: '#f39c12',
+                description: 'Platform tryout online dengan sistem peringkat dan analisis hasil.',
+                materials: [
+                    'Informasi Dasar Try Out lengkap',
+                    'Peringkat & Perbandingan dengan peserta lain',
+                    'Pembahasan Lengkap untuk setiap soal',
+                    'Nilai Subtes Instan setelah selesai mengerjakan'
+                ]
+            }
+        };
 
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1427,18 +1691,18 @@
 
         function showAvatarPage() {
             hideAllPages();
-            document.getElementById('avatarPage').style.display = 'flex';
+            document.getElementById('avatarPage').classList.add('active');
         }
 
         function showMainApp() {
             hideAllPages();
-            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('mainApp').classList.add('active');
         }
 
         function hideAllPages() {
             document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('avatarPage').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('avatarPage').classList.remove('active');
+            document.getElementById('mainApp').classList.remove('active');
             document.getElementById('timerScreen').classList.remove('active');
         }
 
@@ -1451,60 +1715,40 @@
             if (name && email) {
                 userData.name = name;
                 userData.email = email;
-                // Reset avatar selection
-                selectedAvatarTemp = null;
-                document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
-                document.getElementById('btnKonfirmasiAvatar').disabled = true;
                 showAvatarPage();
             }
         }
 
-        // ==================== AVATAR SELECTION ====================
+        // ==================== AVATAR ====================
         function selectAvatar(emoji, element) {
-            // Hapus selected dari semua
+            // Remove selected class from all
             document.querySelectorAll('.avatar-option').forEach(el => {
                 el.classList.remove('selected');
             });
             
-            // Tambahkan selected ke yang diklik
+            // Add to clicked
             element.classList.add('selected');
+            tempAvatar = emoji;
             
-            // Simpan ke variabel sementara
-            selectedAvatarTemp = emoji;
-            
-            // Enable tombol konfirmasi
-            document.getElementById('btnKonfirmasiAvatar').disabled = false;
-            
-            console.log('Avatar dipilih:', emoji); // Debug
+            // Enable button
+            const confirmBtn = document.getElementById('confirmAvatarBtn');
+            confirmBtn.disabled = false;
         }
 
-        function konfirmasiPilihanAvatar() {
-            console.log('Konfirmasi diklik, avatar:', selectedAvatarTemp); // Debug
-            
-            if (selectedAvatarTemp) {
-                // Simpan ke userData
-                userData.avatar = selectedAvatarTemp;
-                
-                // Simpan ke localStorage
+        function confirmAvatar() {
+            if (tempAvatar) {
+                userData.avatar = tempAvatar;
                 saveData();
-                
-                // Update UI
                 updateUIFromData();
-                
-                // Pindah ke main app
                 showMainApp();
-                
-                console.log('Avatar berhasil disimpan:', userData.avatar); // Debug
-            } else {
-                alert('Silakan pilih avatar terlebih dahulu!');
             }
         }
 
-        function gantiAvatarDariProfil() {
-            // Set avatar yang sudah dipilih sebelumnya
-            selectedAvatarTemp = userData.avatar;
+        function changeAvatarFromMenu() {
+            closeModal('profileMenuModal');
+            tempAvatar = userData.avatar;
             
-            // Tandai avatar yang sudah dipilih
+            // Reset selections
             document.querySelectorAll('.avatar-option').forEach(el => {
                 el.classList.remove('selected');
                 if (el.textContent.trim() === userData.avatar) {
@@ -1512,16 +1756,8 @@
                 }
             });
             
-            // Enable tombol
-            document.getElementById('btnKonfirmasiAvatar').disabled = false;
-            
-            // Tampilkan halaman avatar
+            document.getElementById('confirmAvatarBtn').disabled = false;
             showAvatarPage();
-        }
-
-        function changeAvatarFromMenu() {
-            closeModal('profileMenuModal');
-            gantiAvatarDariProfil();
         }
 
         // ==================== UI UPDATES ====================
@@ -1577,6 +1813,8 @@
             closeModal('timerSelectionModal');
             timerSeconds = selectedTimerMinutes * 60;
             totalTimerSeconds = timerSeconds;
+            isTimerRunning = true;
+            isTimerMinimized = false;
             
             document.getElementById('timerScreen').classList.add('active');
             updateTimerDisplay();
@@ -1584,6 +1822,7 @@
             timerInterval = setInterval(() => {
                 timerSeconds--;
                 updateTimerDisplay();
+                updateFloatingTimer();
                 
                 const progress = (timerSeconds / totalTimerSeconds) * 100;
                 document.getElementById('timerProgressFill').style.width = progress + '%';
@@ -1597,19 +1836,52 @@
         function updateTimerDisplay() {
             const minutes = Math.floor(timerSeconds / 60);
             const seconds = timerSeconds % 60;
-            document.getElementById('timerDisplay').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timerDisplay').textContent = timeStr;
+        }
+
+        function updateFloatingTimer() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('floatingTimerDisplay').textContent = timeStr;
+        }
+
+        function minimizeTimer() {
+            document.getElementById('timerScreen').classList.remove('active');
+            document.getElementById('floatingTimer').classList.add('active');
+            isTimerMinimized = true;
+        }
+
+        function expandTimer() {
+            event.stopPropagation();
+            document.getElementById('floatingTimer').classList.remove('active');
+            document.getElementById('timerScreen').classList.add('active');
+            isTimerMinimized = false;
+        }
+
+        function toggleFloatingTimer() {
+            const floatingTimer = document.getElementById('floatingTimer');
+            if (floatingTimer.classList.contains('minimized')) {
+                floatingTimer.classList.remove('minimized');
+            } else {
+                floatingTimer.classList.add('minimized');
+            }
         }
 
         function stopTimer() {
             if (confirm('Yakin ingin menghentikan sesi fokus? XP tidak akan didapatkan.')) {
                 clearInterval(timerInterval);
+                isTimerRunning = false;
                 document.getElementById('timerScreen').classList.remove('active');
+                document.getElementById('floatingTimer').classList.remove('active');
             }
         }
 
         function finishTimer() {
             clearInterval(timerInterval);
+            isTimerRunning = false;
+            document.getElementById('floatingTimer').classList.remove('active');
             
             let xp = 10;
             if (selectedTimerMinutes >= 60) xp = 75;
@@ -1643,6 +1915,133 @@
             document.getElementById('timerScreen').classList.remove('active');
         }
 
+        // ==================== PLATFORM DETAIL & VISIT ====================
+        function showPlatformDetail(platformKey) {
+            const platform = platformData[platformKey];
+            const modalContent = document.getElementById('platformDetailContent');
+            
+            let materialsHtml = platform.materials.map(m => `<li>${m}</li>`).join('');
+            
+            modalContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="width: 60px; height: 60px; background: ${platform.color}; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white; font-size: 1.8rem;">
+                        <i class="fas ${platform.icon}"></i>
+                    </div>
+                    <h2 style="color: var(--dark); margin-bottom: 5px;">${platform.name}</h2>
+                    <span style="background: #f0f0f0; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; color: #666;">SNBT</span>
+                </div>
+                
+                <div class="platform-meta">
+                    <div class="platform-meta-item">
+                        <span>Reward XP</span>
+                        <span style="color: var(--success); font-weight: bold;">+${platform.xp} XP</span>
+                    </div>
+                    <div class="platform-meta-item">
+                        <span>Status</span>
+                        <span>${userData.visitedToday.includes(platform.name) ? '✓ Sudah dikunjungi hari ini' : 'Belum dikunjungi'}</span>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-book"></i> Deskripsi</h3>
+                <p style="color: #555; line-height: 1.6; margin-bottom: 15px;">${platform.description}</p>
+                
+                <h3><i class="fas fa-list-check"></i> Materi yang Tersedia</h3>
+                <ul>
+                    ${materialsHtml}
+                </ul>
+                
+                <div class="btn-group">
+                    <button class="modal-btn secondary" onclick="closeModal('platformDetailModal')" style="flex: 0.4;">
+                        Tutup
+                    </button>
+                    <button class="modal-btn" onclick="visitPlatformFromDetail('${platformKey}')" style="flex: 0.6; background: ${platform.color};">
+                        <i class="fas fa-external-link-alt"></i> Mulai Belajar
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('platformDetailModal').classList.add('active');
+        }
+
+        function visitPlatformFromDetail(platformKey) {
+            closeModal('platformDetailModal');
+            const platform = platformData[platformKey];
+            
+            // Check if timer is running, if not ask to start
+            if (!isTimerRunning) {
+                if (confirm('Timer fokus belum berjalan. Mulai timer fokus sekarang?')) {
+                    showTimerSelection();
+                    // Store pending visit
+                    window.pendingVisit = platformKey;
+                    return;
+                }
+            }
+            
+            executeVisit(platformKey);
+        }
+
+        function executeVisit(platformKey) {
+            const platform = platformData[platformKey];
+            const today = new Date().toDateString();
+            
+            if (userData.lastVisit !== today) {
+                userData.visitedToday = [];
+                userData.todayXP = 0;
+                updateStreakOnActivity();
+                userData.lastVisit = today;
+            }
+            
+            if (userData.visitedToday.includes(platform.name)) {
+                alert(`Kamu sudah mengunjungi ${platform.name} hari ini!`);
+                window.open(platform.url, '_blank');
+                return;
+            }
+            
+            userData.totalXP += platform.xp;
+            userData.todayXP += platform.xp;
+            userData.visitedToday.push(platform.name);
+            addToDailyHistory(platform.xp);
+            
+            if (!userData.visitedPlatforms.includes(platform.name)) {
+                userData.visitedPlatforms.push(platform.name);
+            }
+            
+            checkLevelUp();
+            saveData();
+            updateUIFromData();
+            
+            document.getElementById('modalText').textContent = `Kamu mendapatkan +${platform.xp} XP dari ${platform.name}!`;
+            document.getElementById('xpModal').classList.add('active');
+            createConfetti();
+            
+            // If timer is minimized, keep it running while opening web
+            if (isTimerRunning && isTimerMinimized) {
+                // Keep floating timer visible
+            }
+            
+            setTimeout(() => window.open(platform.url, '_blank'), 800);
+        }
+
+        // Handle pending visit after timer starts
+        function checkPendingVisit() {
+            if (window.pendingVisit && isTimerRunning) {
+                const platformKey = window.pendingVisit;
+                window.pendingVisit = null;
+                setTimeout(() => {
+                    if (confirm(`Timer sudah berjalan. Buka ${platformData[platformKey].name} sekarang?`)) {
+                        executeVisit(platformKey);
+                    }
+                }, 500);
+            }
+        }
+
+        // Override startFocusTimer to check pending visits
+        const originalStartFocusTimer = startFocusTimer;
+        startFocusTimer = function() {
+            originalStartFocusTimer();
+            setTimeout(checkPendingVisit, 1000);
+        };
+
         // ==================== DAILY HISTORY & LEADERBOARD ====================
         function addToDailyHistory(xp) {
             const today = new Date().toDateString();
@@ -1669,7 +2068,8 @@
             const allUsers = [...simulatedUsers, {
                 name: userData.name,
                 xp: currentUserWeeklyXP,
-                isCurrentUser: true
+                isCurrentUser: true,
+                avatar: userData.avatar
             }];
             
             allUsers.sort((a, b) => b.xp - a.xp);
@@ -1700,54 +2100,23 @@
 
         function generateSimulatedUsers() {
             const baseXP = getWeeklyXP();
-            const names = ['Ahmad', 'Siti', 'Budi', 'Dewi'];
+            const names = ['Ahmad', 'Siti', 'Budi', 'Dewi', 'Eko', 'Fitri', 'Gilang', 'Hani'];
             const users = [];
             
             for (let i = 0; i < 4; i++) {
                 const variance = Math.floor(Math.random() * 200) - 100;
                 const xp = Math.max(50, baseXP + variance);
-                users.push({ name: names[i], xp: xp, isCurrentUser: false });
+                users.push({
+                    name: names[i],
+                    xp: xp,
+                    isCurrentUser: false
+                });
             }
             
             return users;
         }
 
-        // ==================== PLATFORM VISIT ====================
-        function visitPlatform(name, xp, url) {
-            const today = new Date().toDateString();
-            
-            if (userData.lastVisit !== today) {
-                userData.visitedToday = [];
-                userData.todayXP = 0;
-                updateStreakOnActivity();
-                userData.lastVisit = today;
-            }
-            
-            if (userData.visitedToday.includes(name)) {
-                alert(`Kamu sudah mengunjungi ${name} hari ini!`);
-                return;
-            }
-            
-            userData.totalXP += xp;
-            userData.todayXP += xp;
-            userData.visitedToday.push(name);
-            addToDailyHistory(xp);
-            
-            if (!userData.visitedPlatforms.includes(name)) {
-                userData.visitedPlatforms.push(name);
-            }
-            
-            checkLevelUp();
-            saveData();
-            updateUIFromData();
-            
-            document.getElementById('modalText').textContent = `Kamu mendapatkan +${xp} XP dari ${name}!`;
-            document.getElementById('xpModal').classList.add('active');
-            createConfetti();
-            
-            setTimeout(() => window.open(url, '_blank'), 800);
-        }
-
+        // ==================== STREAK & LEVEL ====================
         function updateStreakOnActivity() {
             const lastDate = userData.lastVisit ? new Date(userData.lastVisit) : null;
             const today = new Date();
