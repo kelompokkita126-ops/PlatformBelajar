@@ -1295,7 +1295,7 @@
             display: none;
             align-items: flex-start;
             justify-content: center;
-            padding-top: 80px;
+            padding-top: 100px;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -1313,8 +1313,6 @@
             width: 90%;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-            transform: translateY(-20px);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideDownCard 0.4s ease forwards;
         }
 
@@ -1462,6 +1460,30 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
+
+        /* Push notification permission button */
+        .push-permission-btn {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .push-permission-btn.active {
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -1510,6 +1532,11 @@
         <i class="fas fa-bell"></i>
         <span>Belajar Selesai!</span>
     </div>
+
+    <!-- ==================== PUSH PERMISSION BUTTON ==================== -->
+    <button class="push-permission-btn" id="pushPermissionBtn" onclick="requestPushPermission()">
+        <i class="fas fa-bell"></i> Aktifkan Notifikasi
+    </button>
 
     <div class="container">
         
@@ -1814,6 +1841,21 @@
             </div>
         </div>
 
+        <!-- ==================== TIMER FINISHED MODAL ==================== -->
+        <div class="modal" id="timerFinishedModal">
+            <div class="modal-content">
+                <div class="modal-icon">🎉</div>
+                <h2>Waktu Habis!</h2>
+                <p id="finishedText">Kamu berhasil fokus!</p>
+                <button class="modal-btn" onclick="continueTimer()">
+                    <i class="fas fa-redo"></i> Lanjut
+                </button>
+                <button class="modal-btn secondary" onclick="exitTimer()">
+                    <i class="fas fa-check"></i> Keluar
+                </button>
+            </div>
+        </div>
+
         <!-- ==================== PROFILE MENU MODAL ==================== -->
         <div class="modal" id="profileMenuModal">
             <div class="modal-content profile-menu">
@@ -1917,6 +1959,8 @@
         let lastFinishedMinutes = 0;
         let lastFinishedXP = 0;
         let isNotificationMinimized = false;
+        let broadcastChannel = null;
+        let openedWindows = [];
 
         const levelThresholds = [0, 100, 250, 500, 1000, 2000];
         const levelTitles = ['Pemula', 'Petualang', 'Pejuang', 'Jawara', 'Legenda', 'Master'];
@@ -2004,9 +2048,28 @@
 
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
+            initBroadcastChannel();
             loadAllUsersData();
             checkExistingLogin();
+            checkPushPermission();
         });
+
+        // ==================== BROADCAST CHANNEL FOR CROSS-TAB COMMUNICATION ====================
+        function initBroadcastChannel() {
+            if ('BroadcastChannel' in window) {
+                broadcastChannel = new BroadcastChannel('beLajarQuyy_timer');
+                broadcastChannel.onmessage = function(event) {
+                    const data = event.data;
+                    if (data.type === 'TIMER_FINISHED') {
+                        // Show notification in this tab
+                        showTopNotificationInTab(data.minutes, data.xp);
+                    } else if (data.type === 'FOCUS_APP') {
+                        // Focus this tab
+                        window.focus();
+                    }
+                };
+            }
+        }
 
         function checkExistingLogin() {
             const saved = localStorage.getItem('beLajarQuyyUser');
@@ -2017,6 +2080,23 @@
                 showMainApp();
             } else {
                 showLoginPage();
+            }
+        }
+
+        function checkPushPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                document.getElementById('pushPermissionBtn').classList.add('active');
+            }
+        }
+
+        function requestPushPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        document.getElementById('pushPermissionBtn').classList.remove('active');
+                        showToast('Notifikasi diaktifkan! 🔔');
+                    }
+                });
             }
         }
 
@@ -2192,6 +2272,13 @@
             document.getElementById('timerScreen').classList.add('active');
             updateTimerDisplay();
             
+            // Store timer state in localStorage for cross-tab persistence
+            localStorage.setItem('beLajarQuyy_timerState', JSON.stringify({
+                isRunning: true,
+                endTime: Date.now() + (timerSeconds * 1000),
+                totalSeconds: totalTimerSeconds
+            }));
+            
             timerInterval = setInterval(() => {
                 timerSeconds--;
                 updateTimerDisplay();
@@ -2246,6 +2333,7 @@
             if (confirm('Yakin ingin menghentikan sesi fokus? XP tidak akan didapatkan.')) {
                 clearInterval(timerInterval);
                 isTimerRunning = false;
+                localStorage.removeItem('beLajarQuyy_timerState');
                 document.getElementById('timerScreen').classList.remove('active');
                 document.getElementById('floatingTimer').classList.remove('active');
             }
@@ -2255,6 +2343,7 @@
         function finishTimer() {
             clearInterval(timerInterval);
             isTimerRunning = false;
+            localStorage.removeItem('beLajarQuyy_timerState');
             document.getElementById('floatingTimer').classList.remove('active');
             document.getElementById('timerScreen').classList.remove('active');
             
@@ -2279,18 +2368,39 @@
             saveData();
             updateUIFromData();
             
-            // Show top notification banner
-            showTopNotification();
+            // Send notification to all tabs
+            if (broadcastChannel) {
+                broadcastChannel.postMessage({
+                    type: 'TIMER_FINISHED',
+                    minutes: lastFinishedMinutes,
+                    xp: lastFinishedXP
+                });
+            }
             
-            // Show overlay card after a short delay
-            setTimeout(() => {
-                showStudyFinishedOverlay();
-            }, 1500);
+            // Show notification in current tab
+            showStudyFinishedNotification();
+            
+            // Send browser notification if permitted
+            sendBrowserNotification();
             
             createConfetti();
         }
 
         // ==================== TOP NOTIFICATION FUNCTIONS ====================
+        function showStudyFinishedNotification() {
+            // Update modal content
+            document.getElementById('overlayXPText').textContent = `+${lastFinishedXP} XP Didapat!`;
+            document.getElementById('overlayTimeText').textContent = `${lastFinishedMinutes} menit fokus belajar`;
+            
+            // Show top banner first
+            showTopNotification();
+            
+            // Show overlay card after delay
+            setTimeout(() => {
+                showStudyFinishedOverlay();
+            }, 1500);
+        }
+
         function showTopNotification() {
             const banner = document.getElementById('topNotificationBanner');
             const title = document.getElementById('topNotifTitle');
@@ -2311,6 +2421,17 @@
 
         function hideTopNotification() {
             document.getElementById('topNotificationBanner').classList.remove('active');
+        }
+
+        function showTopNotificationInTab(minutes, xp) {
+            // Show notification in any tab that receives the broadcast
+            lastFinishedMinutes = minutes;
+            lastFinishedXP = xp;
+            showTopNotification();
+            
+            // Also show minimized indicator
+            document.getElementById('minimizedNotification').classList.add('active');
+            isNotificationMinimized = true;
         }
 
         // ==================== STUDY FINISHED OVERLAY FUNCTIONS ====================
@@ -2363,6 +2484,19 @@
             document.getElementById('minimizedNotification').classList.remove('active');
             showStudyFinishedOverlay();
             isNotificationMinimized = false;
+        }
+
+        // ==================== BROWSER NOTIFICATION ====================
+        function sendBrowserNotification() {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('Be!ajar Quyy - Waktu Belajar Selesai!', {
+                    body: `Selamat! Kamu telah menyelesaikan ${lastFinishedMinutes} menit fokus belajar dan mendapatkan +${lastFinishedXP} XP!`,
+                    icon: 'https://cdn-icons-png.flaticon.com/512/3233/3233483.png',
+                    badge: 'https://cdn-icons-png.flaticon.com/512/3233/3233483.png',
+                    tag: 'timer-finished',
+                    requireInteraction: true
+                });
+            }
         }
 
         // ==================== TOAST NOTIFICATION ====================
@@ -2443,9 +2577,11 @@
             closeModal('platformDetailModal');
             const platform = platformData[platformKey];
             
+            // Check if timer is running, if not ask to start
             if (!isTimerRunning) {
                 if (confirm('Timer fokus belum berjalan. Mulai timer fokus sekarang?')) {
                     showTimerSelection();
+                    // Store pending visit
                     window.pendingVisit = platformKey;
                     return;
                 }
@@ -2488,9 +2624,15 @@
             document.getElementById('xpModal').classList.add('active');
             createConfetti();
             
+            // Keep floating timer visible if minimized
+            if (isTimerRunning && isTimerMinimized) {
+                // Timer continues in background
+            }
+            
             setTimeout(() => window.open(platform.url, '_blank'), 800);
         }
 
+        // Handle pending visit after timer starts
         function checkPendingVisit() {
             if (window.pendingVisit && isTimerRunning) {
                 const platformKey = window.pendingVisit;
@@ -2503,6 +2645,7 @@
             }
         }
 
+        // Override startFocusTimer to check pending visits
         const originalStartFocusTimer = startFocusTimer;
         startFocusTimer = function() {
             originalStartFocusTimer();
@@ -2529,11 +2672,15 @@
             return userData.dailyHistory.reduce((sum, h) => sum + h.xp, 0);
         }
 
-        // ==================== MODIFIED LEADERBOARD ====================
+        // ==================== MODIFIED LEADERBOARD - REAL USERS ONLY ====================
         function showLeaderboard() {
+            // Update data user saat ini ke leaderboard
             updateUserInLeaderboard();
+            
+            // Reload data untuk mendapatkan yang terbaru
             loadAllUsersData();
             
+            // Ambil data mingguan untuk peringkat
             const leaderboardData = allUsersData.map(user => ({
                 name: user.name,
                 xp: user.weeklyXP || 0,
@@ -2543,12 +2690,15 @@
                 isCurrentUser: user.email === userData.email
             }));
             
+            // Sort berdasarkan XP mingguan (descending)
             leaderboardData.sort((a, b) => b.xp - a.xp);
             
+            // Render
             const list = document.getElementById('leaderboardList');
             const infoBar = document.getElementById('leaderboardInfoBar');
             list.innerHTML = '';
             
+            // Update info bar dengan peringkat user saat ini
             const currentUserRank = leaderboardData.findIndex(u => u.isCurrentUser) + 1;
             const totalParticipants = leaderboardData.length;
             
@@ -2578,6 +2728,8 @@
                     
                     const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : 'rank-other';
                     const medal = index < 3 ? ['🥇', '🥈', '🥉'][index] : (index + 1);
+                    
+                    // Tampilkan avatar jika ada
                     const avatarDisplay = user.avatar || '👤';
                     
                     item.innerHTML = `
@@ -2651,6 +2803,7 @@
 
         function saveData() {
             localStorage.setItem('beLajarQuyyUser', JSON.stringify(userData));
+            // Otomatis update leaderboard setiap kali save
             updateUserInLeaderboard();
         }
 
@@ -2670,7 +2823,7 @@
             }
         }
 
-        // ==================== RESET LEADERBOARD ====================
+        // ==================== RESET LEADERBOARD (Opsional - untuk testing) ====================
         function resetLeaderboard() {
             if (confirm('Yakin ingin reset semua data peringkat? Data pribadi tetap tersimpan.')) {
                 allUsersData = [];
@@ -2678,6 +2831,32 @@
                 alert('Data peringkat telah direset!');
             }
         }
+
+        // ==================== VISIBILITY API FOR BACKGROUND TIMER ====================
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && isTimerRunning) {
+                // Tab is hidden, timer continues in background
+                console.log('Timer running in background...');
+            } else if (!document.hidden && isTimerRunning) {
+                // Tab is visible again, check timer state
+                const savedState = localStorage.getItem('beLajarQuyy_timerState');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    const now = Date.now();
+                    const remaining = Math.ceil((state.endTime - now) / 1000);
+                    
+                    if (remaining <= 0) {
+                        // Timer finished while tab was hidden
+                        finishTimer();
+                    } else {
+                        // Update timer display
+                        timerSeconds = remaining;
+                        updateTimerDisplay();
+                        updateFloatingTimer();
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
